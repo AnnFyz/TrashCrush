@@ -3,7 +3,7 @@ var height     = gameConfig.screenResolution.height;
 var centerX    =  0.5;
 var centerY    =  0.5;
 var stageScale = gameConfig.ratio;
-
+var cons;
 
 window.onload = function () {
     const config = {
@@ -30,6 +30,8 @@ window.onload = function () {
     };
 
     game = new Phaser.Game(config);
+    cons = new Constants();
+
 
 }
 

@@ -1,5 +1,6 @@
 const amountOfItems_plastic = 3;
-
+let index = 0;
+let plasticItemCollection = [];
 const typeOfWaste = {
     Plastic: 'plastic',
     Paper: 'paper',
@@ -13,14 +14,21 @@ let currentItemsCollection = []; //current collection for current level
 const itemCollections = [[]]; //all item collections
 
 // in collection will be stored keys of images
-function itemCollection(amountOfItems, typeOfWaste) {
-    let itemCollection = []
-    for (let i = 0; i < amountOfItems; i++) {
-        newItem = new Item({ scene: this }, '${typeOfWaste}${i}');
-        itemCollection.push(newItem);
+function fillItemCollection(gameThis) {
+    //let itemCollection = [];
+    for (let i = 0; i < amountOfItems_plastic; i++) {
+        let item = new Item({ scene: gameThis, x: game.config.width / 2, y: game.config.height / 2, key: typeOfWaste.Plastic + i, index: i });
+        plasticItemCollection.push(item);
+        //return itemCollection;
     }
-    return itemCollection;
 }
+
+
+function customFunc() {
+    console.log("FUNC");
+}
+
+
 
 class MainScene extends Phaser.Scene {
 
@@ -30,29 +38,38 @@ class MainScene extends Phaser.Scene {
     preload() {
         this.load.image('waste', 'assets/images/Plastic/plastic2.png');
         for (let i = 0; i < amountOfItems_plastic; i++) {
-            this.load.image(typeOfWaste.Plastic + i, 'assets/images/Plastic/'+ typeOfWaste.Plastic + i +'.png');
+            this.load.image(typeOfWaste.Plastic + i, 'assets/images/Plastic/' + typeOfWaste.Plastic + i + '.png');
         }
 
     }
 
     create() {
-      let item = new Item({scene: this, x: game.config.width / 2, y: game.config.height / 2, key:typeOfWaste.Plastic + 0});
-        //this.waste1 = this.add.image(game.config.width / 2, game.config.height / 2, typeOfWaste.Plastic + 0);
-
-        /* for (let i = 0; i < amountOfItems_plastic; i++) {
-            this.add.image(game.config.width / 2 + i*10, game.config.height / 2 + i*10, typeOfWaste.Plastic + i);
-        } */
-
+        this.emitter = EventDispatcher.getInstance();
+        fillItemCollection(this);
+        this.currentActiveItem = plasticItemCollection[0];
+        Align.scaleToGameW(this.currentActiveItem, .25);
+        this.currentActiveItem.activateItem();
+        this.emitter.on('itemUpdated', this.updateItem);
 
     }
 
+
+    updateItem() {
+        if (index < plasticItemCollection.length - 1) {
+            index++;
+            this.currentActiveItem = plasticItemCollection[index];
+            Align.scaleToGameW(this.currentActiveItem, .25);
+            this.currentActiveItem.activateItem();
+        }
+
+        else {
+            console.log('the end');
+        }
+
+    }
 
     update() {
 
     }
 
-
-
-
 }
-

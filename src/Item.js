@@ -1,17 +1,25 @@
-class Item extends Phaser.GameObjects.Sprite
-{
- constructor(config)
-{
-super(config.scene, config.x, config.y, config.key);
-config.scene.add.existing(this);
+class Item extends Phaser.GameObjects.Sprite {
+    constructor(config) {
+        super(config.scene, config.x, config.y, config.key, config.index);
+        this.index = config.index;
+        this.deactivateItem();
+        this.setInteractive();
+        this.on('pointerdown', this.clickMe, this)
+        config.scene.add.existing(this);
+    }
 
-this.setInteractive();
-this.on('pointerdown', this.clickMe, this)
-}
+    clickMe() {
+        this.emitter = EventDispatcher.getInstance();
+        this.emitter.emit(cons.ITEM_UPDATED);
+        this.deactivateItem();
 
-clickMe()
-{
+    }
 
- console.log('was clicked');
-}
+    deactivateItem() {
+        this.setActive(false).setVisible(false);
+    }
+
+    activateItem() {
+        this.setActive(true).setVisible(true);
+    }
 }
