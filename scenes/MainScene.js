@@ -13,7 +13,9 @@ const typeOfWaste = {
 
 
 let currentItemsCollection = []; //current collection for current level
-const itemCollections = [[]]; //all item collections
+let currentActiveItem;
+let itemCollections = [[]]; //all item collections
+let levelItemCollections = [[]]; //all item collections which will be used in the level
 
 // in collection will be stored items 
 function fillItemCollection(gameThis, amountOfItems, wasteType) {
@@ -26,11 +28,12 @@ function fillItemCollection(gameThis, amountOfItems, wasteType) {
 
 }
 
-function fillAllCollections(gameThis) {
+function fillAllItemCollections(gameThis) {
     plasticItemCollection = fillItemCollection(gameThis, amountOfItems_plastic, typeOfWaste.Plastic).slice();
     biowasteItemCollection = fillItemCollection(gameThis, amountOfItems_biowaste, typeOfWaste.Biowaste).slice();
     itemCollections.push(plasticItemCollection);
     itemCollections.push(biowasteItemCollection);
+    itemCollections.shift();
 }
 
 class MainScene extends Phaser.Scene {
@@ -50,8 +53,13 @@ class MainScene extends Phaser.Scene {
 
     create() {
         this.emitter = EventDispatcher.getInstance();
-        fillAllCollections(this);
-        currentItemsCollection = biowasteItemCollection.slice();
+        fillAllItemCollections(this);
+
+        for (var i = 0; i < itemCollections.length; i++) {
+            levelItemCollections.push(itemCollections[i]);
+        }
+
+        this.selectRandomItem();
         this.activateFirstItem();
         this.emitter.on(cons.ITEM_UPDATED, this.updateItem);
 
@@ -60,23 +68,48 @@ class MainScene extends Phaser.Scene {
     update() {
 
     }
+    selectRandomItem() {
+        let firstRandIndex = Math.floor(Math.random() * levelItemCollections.length);
+        let secondRandIndex = Math.floor(Math.random() * levelItemCollections[firstRandIndex].length);
+        currentActiveItem = levelItemCollections[firstRandIndex][secondRandIndex];
+        levelItemCollections.splice([firstRandIndex][secondRandIndex], 1);
+        Align.scaleToGameW(currentActiveItem, .25);
+        currentActiveItem.activateItem();
+
+
+    }
 
     activateFirstItem() {
-        this.currentActiveItem = currentItemsCollection[0];
-        Align.scaleToGameW(this.currentActiveItem, .25);
-        this.currentActiveItem.activateItem();
+        //currentActiveItem = currentItemsCollection[0];
+        Align.scaleToGameW(currentActiveItem, .25);
+        currentActiveItem.activateItem();
     }
     updateItem() {
-        if (index < currentItemsCollection.length - 1) {
-            index++;
-            this.currentActiveItem = currentItemsCollection[index];
-            Align.scaleToGameW(this.currentActiveItem, .25);
-            this.currentActiveItem.activateItem();
+        /*  if (index < currentItemsCollection.length - 1) {
+             index++;
+             currentActiveItem = currentItemsCollection[index];
+             Align.scaleToGameW(currentActiveItem, .25);
+             currentActiveItem.activateItem();
+         }
+ 
+         else {
+             console.log('the end');
+         } */
+        let firstRandIndex = Math.floor(Math.random() * levelItemCollections.length);
+        if (levelItemCollections[firstRandIndex].length >= 0) {
+            let secondRandIndex = Math.floor(Math.random() * levelItemCollections[firstRandIndex].length);
+            currentActiveItem = levelItemCollections[firstRandIndex][secondRandIndex];
+            levelItemCollections.splice([firstRandIndex][secondRandIndex], 1);
+        }
+        else {
+            levelItemCollections.splice(firstRandIndex, 1);
+            console.log("array is empty")
+            let firstRandIndex = Math.floor(Math.random() * levelItemCollections.length);
+
         }
 
-        else {
-            console.log('the end');
-        }
+        Align.scaleToGameW(currentActiveItem, .25);
+        currentActiveItem.activateItem();
 
     }
 
