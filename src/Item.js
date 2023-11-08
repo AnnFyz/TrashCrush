@@ -1,7 +1,8 @@
 class Item extends Phaser.GameObjects.Sprite {
     constructor(config) {
-        super(config.scene, config.x, config.y, config.key, config.index);
+        super(config.scene, config.x, config.y, config.key, config.index, config.wasteType);
         this.index = config.index;
+        this.wasteType = config.wasteType;
         this.deactivateItem();
         this.setInteractive();
         this.on('pointerdown', this.clickMe, this)
@@ -9,8 +10,7 @@ class Item extends Phaser.GameObjects.Sprite {
     }
 
     clickMe() {
-        this.emitter = EventDispatcher.getInstance();
-        this.emitter.emit(cons.ITEM_UPDATED);
+        EventDispatcher.getInstance().emit(cons.ITEM_UPDATED);
         this.deactivateItem();
 
     }

@@ -1,6 +1,8 @@
 const amountOfItems_plastic = 3;
-let index = 0;
+const amountOfItems_biowaste = 3;
 let plasticItemCollection = [];
+let biowasteItemCollection = [];
+let index = 0;
 const typeOfWaste = {
     Plastic: 'plastic',
     Paper: 'paper',
@@ -13,22 +15,23 @@ const typeOfWaste = {
 let currentItemsCollection = []; //current collection for current level
 const itemCollections = [[]]; //all item collections
 
-// in collection will be stored keys of images
-function fillItemCollection(gameThis) {
-    //let itemCollection = [];
-    for (let i = 0; i < amountOfItems_plastic; i++) {
-        let item = new Item({ scene: gameThis, x: game.config.width / 2, y: game.config.height / 2, key: typeOfWaste.Plastic + i, index: i });
-        plasticItemCollection.push(item);
-        //return itemCollection;
+// in collection will be stored items 
+function fillItemCollection(gameThis, amountOfItems, wasteType) {
+    let itemCollection = [];
+    for (let i = 0; i < amountOfItems; i++) {
+        let item = new Item({ scene: gameThis, x: game.config.width / 2, y: game.config.height / 2, key: wasteType + i, index: i, wasteType });
+        itemCollection.push(item);
     }
+    return itemCollection;
+
 }
 
-
-function customFunc() {
-    console.log("FUNC");
+function fillAllCollections(gameThis) {
+    plasticItemCollection = fillItemCollection(gameThis, amountOfItems_plastic, typeOfWaste.Plastic).slice();
+    biowasteItemCollection = fillItemCollection(gameThis, amountOfItems_biowaste, typeOfWaste.Biowaste).slice();
+    itemCollections.push(plasticItemCollection);
+    itemCollections.push(biowasteItemCollection);
 }
-
-
 
 class MainScene extends Phaser.Scene {
 
@@ -36,28 +39,37 @@ class MainScene extends Phaser.Scene {
         super('MainScene');
     }
     preload() {
-        this.load.image('waste', 'assets/images/Plastic/plastic2.png');
         for (let i = 0; i < amountOfItems_plastic; i++) {
             this.load.image(typeOfWaste.Plastic + i, 'assets/images/Plastic/' + typeOfWaste.Plastic + i + '.png');
         }
 
+        for (let i = 0; i < amountOfItems_biowaste; i++) {
+            this.load.image(typeOfWaste.Biowaste + i, 'assets/images/Biowaste/' + typeOfWaste.Biowaste + i + '.png');
+        }
     }
 
     create() {
         this.emitter = EventDispatcher.getInstance();
-        fillItemCollection(this);
-        this.currentActiveItem = plasticItemCollection[0];
-        Align.scaleToGameW(this.currentActiveItem, .25);
-        this.currentActiveItem.activateItem();
-        this.emitter.on('itemUpdated', this.updateItem);
+        fillAllCollections(this);
+        currentItemsCollection = biowasteItemCollection.slice();
+        this.activateFirstItem();
+        this.emitter.on(cons.ITEM_UPDATED, this.updateItem);
 
     }
 
+    update() {
 
+    }
+
+    activateFirstItem() {
+        this.currentActiveItem = currentItemsCollection[0];
+        Align.scaleToGameW(this.currentActiveItem, .25);
+        this.currentActiveItem.activateItem();
+    }
     updateItem() {
-        if (index < plasticItemCollection.length - 1) {
+        if (index < currentItemsCollection.length - 1) {
             index++;
-            this.currentActiveItem = plasticItemCollection[index];
+            this.currentActiveItem = currentItemsCollection[index];
             Align.scaleToGameW(this.currentActiveItem, .25);
             this.currentActiveItem.activateItem();
         }
@@ -68,8 +80,5 @@ class MainScene extends Phaser.Scene {
 
     }
 
-    update() {
-
-    }
 
 }
