@@ -53,6 +53,9 @@ class MainScene extends Phaser.Scene {
 
     create() {
         this.emitter = EventDispatcher.getInstance();
+        this.sb = new Scorebox({ scene: this });
+        this.sb.x = game.config.width / 2;
+        this.sb.y = 500;
         fillAllItemCollections(this);
 
         for (var i = 0; i < itemCollections.length; i++) {
