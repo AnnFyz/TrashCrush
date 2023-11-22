@@ -19,7 +19,14 @@ const itemCollections = [[]]; //all item collections
 function fillItemCollection(gameThis, amountOfItems, wasteType) {
   let itemCollection = [];
   for (let i = 0; i < amountOfItems; i++) {
-    let item = new Item({ scene: gameThis, x: game.config.width / 2, y: game.config.height / 2, key: wasteType + i, index: i, wasteType });
+    let item = new Item({
+      scene: gameThis,
+      x: game.config.width / 2,
+      y: game.config.height / 2,
+      key: wasteType + i,
+      index: i,
+      wasteType,
+    });
     itemCollection.push(item);
   }
   return itemCollection;
@@ -38,6 +45,11 @@ class MainScene extends Phaser.Scene {
   constructor() {
     super("MainScene");
   }
+
+  init() {
+    this.currentActiveItem;
+    this.gameFieldScene;
+  }
   preload() {
     for (let i = 0; i < amountOfItems_plastic; i++) {
       this.load.image(typeOfWaste.Plastic + i, "assets/images/Plastic/" + typeOfWaste.Plastic + i + ".png");
@@ -49,6 +61,7 @@ class MainScene extends Phaser.Scene {
   }
 
   create() {
+    this.gameFieldScene = this.scene.get("GameField");
     this.emitter = EventDispatcher.getInstance();
     this.sb = new Scorebox({ scene: this });
     this.sb.x = game.config.width / 2;
@@ -59,10 +72,16 @@ class MainScene extends Phaser.Scene {
       console.log("currentItemsCollection[0][0].wasteType " + currentItemsCollection[0].wasteType);
     }
     this.activateItem();
-    this.emitter.on(cons.ITEM_UPDATED, this.updateItem.bind(this));
+    //this.emitter.on(cons.ITEM_UPDATED, this.updateItem.bind(this));
+    /*     this.input.on("drag", (pointer, gameObject, dragX, dragY) => {
+      gameObject.x = dragX;
+      gameObject.y = dragY;
+    }); */
   }
 
-  update() {}
+  update() {
+    console.log("this.checkOverlap(); " + this.checkOverlap());
+  }
 
   activateItem() {
     let tempItemCol = shuffle(currentItemsCollection);
@@ -88,10 +107,15 @@ class MainScene extends Phaser.Scene {
       }
     });
     currentItemsCollection = shuffle(itemCollections);
-    currentItemsCollection = currentItemsCollection[0].slice();
+    if (currentItemsCollection.length != 0) {
+      currentItemsCollection = currentItemsCollection[0].slice();
+    }
   }
 
   removeShowedItem() {
+    if (itemCollections.length == 0) {
+      return;
+    }
     const result = {
       col: -1,
       row: -1,
@@ -107,5 +131,12 @@ class MainScene extends Phaser.Scene {
 
     console.log("ItemPos: " + result.col, ", " + result.row);
     itemCollections[result.row].splice(result.col, 1);
+  }
+
+  checkOverlap() {
+    let boundsOfActiveItem = this.currentActiveItem.getBounds();
+    let boundsOfRightField = this.gameFieldScene.rightField.getBounds();
+    let boundsOfLeftField = this.gameFieldScene.leftField.getBounds();
+    return Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfRightField);
   }
 }
