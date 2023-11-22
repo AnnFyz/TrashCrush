@@ -9,7 +9,7 @@ class Item extends Phaser.GameObjects.Sprite {
     this.setInteractive();
     config.scene.input.setDraggable(this);
     config.scene.add.existing(this);
-    config.scene.input.on("drag", this.checkOverlap, config);
+    config.scene.input.on("drag", this.moveItem, this);
     //this.on("pointerdown", this.swape, this);
   }
 
