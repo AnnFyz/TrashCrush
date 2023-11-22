@@ -61,7 +61,6 @@ class MainScene extends Phaser.Scene {
   }
 
   create() {
-    this.gameFieldScene = this.scene.get("GameField");
     this.emitter = EventDispatcher.getInstance();
     this.sb = new Scorebox({ scene: this });
     this.sb.x = game.config.width / 2;
@@ -72,7 +71,7 @@ class MainScene extends Phaser.Scene {
       console.log("currentItemsCollection[0][0].wasteType " + currentItemsCollection[0].wasteType);
     }
     this.activateItem();
-    //this.emitter.on(cons.ITEM_UPDATED, this.updateItem.bind(this));
+    this.emitter.on(cons.ITEM_UPDATED, this.updateItem.bind(this));
     /*     this.input.on("drag", (pointer, gameObject, dragX, dragY) => {
       gameObject.x = dragX;
       gameObject.y = dragY;
@@ -80,7 +79,7 @@ class MainScene extends Phaser.Scene {
   }
 
   update() {
-    console.log("this.checkOverlap(); " + this.checkOverlap());
+    //console.log("this.checkOverlap(); " + this.checkOverlap());
   }
 
   activateItem() {
@@ -131,12 +130,5 @@ class MainScene extends Phaser.Scene {
 
     console.log("ItemPos: " + result.col, ", " + result.row);
     itemCollections[result.row].splice(result.col, 1);
-  }
-
-  checkOverlap() {
-    let boundsOfActiveItem = this.currentActiveItem.getBounds();
-    let boundsOfRightField = this.gameFieldScene.rightField.getBounds();
-    let boundsOfLeftField = this.gameFieldScene.leftField.getBounds();
-    return Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfRightField);
   }
 }
