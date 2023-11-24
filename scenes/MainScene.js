@@ -67,7 +67,7 @@ class MainScene extends Phaser.Scene {
   create() {
     this.scene.bringToTop("Gametimer");
     this.emitter = EventDispatcher.getInstance();
-
+    this.controller = new GameController();
     this.sb = new Scorebox({ scene: this });
     this.sb.x = game.config.width / 2;
     this.sb.y = 45;
@@ -86,6 +86,7 @@ class MainScene extends Phaser.Scene {
   }
 
   updateItem() {
+    this.emitter.emit(cons.UP_POINTS, 1);
     this.removeShowedItem();
     this.updateCurrentCollection();
     this.activateItem();

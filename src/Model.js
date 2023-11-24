@@ -6,28 +6,27 @@ const level = {
     GlassLevel: 'glassLevel'
 };
 class Model {
-    constructor() {
-        this.score = 0;
-        this.currentLevel = level.PlasticLevel;
-        this.currentTypeOfWaste = typeOfWaste.Plastic;
-    }
+  constructor() {
+    this._score = 0;
+    this._currentLevel = level.PlasticLevel;
+    this.currentTypeOfWaste = typeOfWaste.Plastic;
+  }
 
-    set score(val) {
-        this.score = val;
-        EventDispatcher.getInstance().emit(cons.SCORE_UPDATED);
-    }
+  set score(val) {
+    this._score = val;
+    EventDispatcher.getInstance().emit(cons.SCORE_UPDATED);
+  }
 
-    get score() {
-        return this.score;
-    }
+  get score() {
+    return this._score;
+  }
 
-    set currentLevel(level) {
-        this.currentLevel = level;
-        EventDispatcher.getInstance().emit(cons.LEVEL_UPDATED);
-    }
+  set currentLevel(level) {
+    this._currentLevel = level;
+    EventDispatcher.getInstance().emit(cons.LEVEL_UPDATED);
+  }
 
-    get currentLevel() {
-        return this.currentLevel;
-
-    }
+  get currentLevel() {
+    return this._currentLevel;
+  }
 }

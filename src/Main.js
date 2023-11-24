@@ -5,6 +5,7 @@ var centerY = 0.5;
 var stageScale = gameConfig.ratio;
 var cons;
 var game;
+var model;
 
 window.onload = function () {
   const config = {
@@ -30,6 +31,7 @@ window.onload = function () {
   };
 
   game = new Phaser.Game(config);
+  model = new Model();
   cons = new Constants();
 };
 
