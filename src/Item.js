@@ -7,19 +7,33 @@ class Item extends Phaser.GameObjects.Sprite {
     this.scene = config.scene;
     this.deactivateItem();
     this.setInteractive();
+    this.x = config.x;
+    this.y = config.y;
     config.scene.input.setDraggable(this);
     config.scene.add.existing(this);
-    config.scene.input.on("drag", this.moveItem, this);
-    //this.on("pointerdown", this.swape, this);
+    this.on("pointerout", () => {
+      this.scene.input.off("drag", this.moveItem, this);
+    });
+    this.on("pointerover", () => {
+      this.resetPos();
+      this.scene.input.on("drag", this.moveItem, this);
+    });
+    config.scene.input.on("dragend", this.resetPos, this, config.x, config.y);
+
+    EventDispatcher.getInstance().on(cons.ITEM_UPDATED, this.swapeRight.bind(this));
   }
 
-  swape() {
-    EventDispatcher.getInstance().emit(cons.ITEM_UPDATED);
+  swapeRight() {
+    this.resetPos();
     this.deactivateItem();
   }
 
   moveItem() {
     this.setPosition(game.input.mousePointer.x, game.input.mousePointer.y);
+  }
+
+  resetPos() {
+    this.setPosition(game.config.width / 2, game.config.height / 2);
   }
 
   deactivateItem() {
@@ -30,17 +44,4 @@ class Item extends Phaser.GameObjects.Sprite {
     this.setActive(true).setVisible(true);
   }
 
-  /*  checkOverlap() {
-    this.updateTransform();
-    console.log("THIS " + this.getBounds());
-    this.gameFieldScene = this.scene.scene.get("GameField");
-    let boundsOfActiveItem = this.getBounds();
-    let boundsOfRightField = this.gameFieldScene.rightField.getBounds();
-    let boundsOfLeftField = this.gameFieldScene.leftField.getBounds();
-    if (Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfRightField)) {
-      EventDispatcher.getInstance().emit(cons.ITEM_UPDATED);
-      this.deactivateItem();
-      console.log("UPDATE ITEM");
-    }
-  } */
 }

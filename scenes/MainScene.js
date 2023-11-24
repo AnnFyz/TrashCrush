@@ -58,31 +58,25 @@ class MainScene extends Phaser.Scene {
     for (let i = 0; i < amountOfItems_biowaste; i++) {
       this.load.image(typeOfWaste.Biowaste + i, "assets/images/Biowaste/" + typeOfWaste.Biowaste + i + ".png");
     }
+
+    this.gameTimer = this.scene.get("Gametimer");
+    this.gameFieldScene = this.scene.get("GameField");
+
   }
 
   create() {
-    this.gameFieldScene = this.scene.get("GameField");
+    this.scene.bringToTop("Gametimer");
     this.emitter = EventDispatcher.getInstance();
+
     this.sb = new Scorebox({ scene: this });
     this.sb.x = game.config.width / 2;
     this.sb.y = 45;
     fillAllCollections(this);
     this.updateCurrentCollection();
-    for (let i = 0; i < currentItemsCollection.length; i++) {
-      console.log("currentItemsCollection[0][0].wasteType " + currentItemsCollection[0].wasteType);
-    }
     this.activateItem();
-    this.emitter.on(cons.ITEM_UPDATED, this.updateItem.bind(this));
-    /*     this.input.on("drag", (pointer, gameObject, dragX, dragY) => {
-      gameObject.x = dragX;
-      gameObject.y = dragY;
-    }); */
+    this.timedEvent = this.time.addEvent({ delay: 250, callback: this.checkOverlap, callbackScope: this, loop: true });
   }
 
-  update() {
-    this.checkOverlap();
-    //console.log("this.checkOverlap(); " + this.checkOverlap());
-  }
 
   activateItem() {
     let tempItemCol = shuffle(currentItemsCollection);
@@ -101,7 +95,6 @@ class MainScene extends Phaser.Scene {
     itemCollections.forEach((collection, index) => {
       if (collection.length == 0) {
         itemCollections.splice(index, 1);
-        console.log("col was removed");
       } else if (itemCollections.length == 1 && collection.length != 0) {
         currentItemsCollection = collection.slice();
         return;
@@ -129,18 +122,19 @@ class MainScene extends Phaser.Scene {
         result.col = itemPosition;
       }
     });
-
-    console.log("ItemPos: " + result.col, ", " + result.row);
     itemCollections[result.row].splice(result.col, 1);
   }
 
   checkOverlap() {
+    if(this.currentActiveItem === undefined){
+      return;
+    }
     let boundsOfActiveItem = this.currentActiveItem.getBounds();
     let boundsOfRightField = this.gameFieldScene.rightField.getBounds();
     let boundsOfLeftField = this.gameFieldScene.leftField.getBounds();
     if (Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfRightField)) {
       this.emitter.emit(cons.ITEM_UPDATED);
-      console.log("UPDATE ITEM");
+      this.timedEvent = this.time.delayedCall(50, this.updateItem, [], this);
     }
   }
 }
