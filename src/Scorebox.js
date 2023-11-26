@@ -14,7 +14,7 @@ EventDispatcher.getInstance().on(cons.SCORE_UPDATED, this.scoreUpdated, this);
 
 scoreUpdated()
 {
- this.text1.setText("Score: " + model.score);
+ this.text1.setText("SCORE:" + model.score);
 }
 
 }

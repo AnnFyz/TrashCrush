@@ -9,9 +9,22 @@ class GameField extends Phaser.Scene {
   }
   create() {
     this.scene.launch("MainScene");
-    this.leftField = this.add.rectangle(0, 0, game.config.width / 5, game.config.height, 0x6666ff);
+    this.leftField = this.add.rectangle(
+      0,
+      0,
+      game.config.width / 5,
+      game.config.height,
+      model._currentGameLevel.fieldColor
+    );
     this.leftField.setOrigin(0, 0);
-    this.rightField = this.add.rectangle(game.config.width, 0, game.config.width / 5, game.config.height, 0x6666ff);
+
+    this.rightField = this.add.rectangle(
+      game.config.width,
+      0,
+      game.config.width / 5,
+      game.config.height,
+      model._currentGameLevel.fieldColor
+    );
     this.rightField.setOrigin(1, 0);
   }
 

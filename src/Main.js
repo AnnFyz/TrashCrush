@@ -6,6 +6,7 @@ var stageScale = gameConfig.ratio;
 var cons;
 var game;
 var model;
+var gameLevels;
 
 window.onload = function () {
   const config = {

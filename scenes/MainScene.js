@@ -61,7 +61,6 @@ class MainScene extends Phaser.Scene {
 
     this.gameTimer = this.scene.get("Gametimer");
     this.gameFieldScene = this.scene.get("GameField");
-
   }
 
   create() {
@@ -77,6 +76,15 @@ class MainScene extends Phaser.Scene {
     this.timedEvent = this.time.addEvent({ delay: 250, callback: this.checkOverlap, callbackScope: this, loop: true });
   }
 
+  updateLevel() {
+    if (itemCollections.length == 0) {
+      console.log("UpdateLevel");
+      this.emitter.emit(cons.LEVEL_UPDATED, model.levelIndex + 1);
+      fillAllCollections(this);
+      this.updateCurrentCollection();
+      this.activateItem();
+    }
+  }
 
   activateItem() {
     let tempItemCol = shuffle(currentItemsCollection);
@@ -85,10 +93,39 @@ class MainScene extends Phaser.Scene {
     this.currentActiveItem.activateItem();
   }
 
-  updateItem() {
-    this.emitter.emit(cons.UP_POINTS, 1);
+  swipeRight() {
     this.removeShowedItem();
     this.updateCurrentCollection();
+
+    if (this.checkItem()) {
+      this.emitter.emit(cons.UP_POINTS, 1);
+    } else {
+      this.emitter.emit(cons.DOWN_POINTS, 1);
+    }
+
+    if (itemCollections.length == 0) {
+      this.updateLevel();
+      return;
+    }
+
+    this.activateItem();
+  }
+
+  swipeLeft() {
+    this.removeShowedItem();
+    this.updateCurrentCollection();
+
+    if (!this.checkItem()) {
+      this.emitter.emit(cons.UP_POINTS, 1);
+    } else {
+      this.emitter.emit(cons.DOWN_POINTS, 1);
+    }
+
+    if (itemCollections.length == 0) {
+      this.updateLevel();
+      return;
+    }
+
     this.activateItem();
   }
 
@@ -111,6 +148,7 @@ class MainScene extends Phaser.Scene {
     if (itemCollections.length == 0) {
       return;
     }
+
     const result = {
       col: -1,
       row: -1,
@@ -127,22 +165,24 @@ class MainScene extends Phaser.Scene {
   }
 
   checkOverlap() {
-    if(this.currentActiveItem === undefined){
+    if (this.currentActiveItem === undefined) {
       return;
     }
     let boundsOfActiveItem = this.currentActiveItem.getBounds();
     let boundsOfRightField = this.gameFieldScene.rightField.getBounds();
     let boundsOfLeftField = this.gameFieldScene.leftField.getBounds();
     if (Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfRightField)) {
-      this.checkItem();
       this.emitter.emit(cons.ITEM_UPDATED);
-      this.timedEvent = this.time.delayedCall(50, this.updateItem, [], this);
+      this.timedEvent = this.time.delayedCall(50, this.swipeRight, [], this);
+    } else if (Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfLeftField)) {
+      this.emitter.emit(cons.ITEM_UPDATED);
+      this.timedEvent = this.time.delayedCall(50, this.swipeLeft, [], this);
     }
   }
 
   checkItem() {
-    console.log( this.currentActiveItem.wasteType === model.currentLevel.typeOfWaste);
-    return this.currentActiveItem.wasteType === model.currentLevel.typeOfWaste;
+    console.log(this.currentActiveItem.wasteType === model.currentGameLevel.typeOfWaste);
+    return this.currentActiveItem.wasteType === model.currentGameLevel.typeOfWaste;
   }
-
 }
+ 
