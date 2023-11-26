@@ -1,15 +1,7 @@
-const level = {
-    PlasticLevel: 'plasticLevel',
-    PaperLevel: 'paperLavel',
-    BiowasteLevel: 'biowasteLevel',
-    ResidualWasteLevel: 'residualWasteLevel',
-    GlassLevel: 'glassLevel'
-};
 class Model {
   constructor() {
     this._score = 0;
-    this._currentLevel = level.PlasticLevel;
-    this.currentTypeOfWaste = typeOfWaste.Plastic;
+    this._currentGameLevel = { name: levels.PlasticLevel, typeOfWaste: typesOfWaste.Plastic };
   }
 
   set score(val) {
@@ -22,11 +14,11 @@ class Model {
   }
 
   set currentLevel(level) {
-    this._currentLevel = level;
+    this._currentGameLevel = level;
     EventDispatcher.getInstance().emit(cons.LEVEL_UPDATED);
   }
 
   get currentLevel() {
-    return this._currentLevel;
+    return this._currentGameLevel;
   }
 }

@@ -20,7 +20,8 @@ class Item extends Phaser.GameObjects.Sprite {
     });
     config.scene.input.on("dragend", this.resetPos, this, config.x, config.y);
 
-    EventDispatcher.getInstance().on(cons.ITEM_UPDATED, this.swapeRight.bind(this));
+    EventDispatcher.getInstance().on(cons.ITEM_UPDATED, () => {this.swapeRight() });
+
   }
 
   swapeRight() {
@@ -43,5 +44,4 @@ class Item extends Phaser.GameObjects.Sprite {
   activateItem() {
     this.setActive(true).setVisible(true);
   }
-
 }

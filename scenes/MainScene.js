@@ -4,13 +4,13 @@ let plasticItemCollection = [];
 let biowasteItemCollection = [];
 let index = 0;
 let amountOfCollections;
-const typeOfWaste = {
+/* const typeOfWaste = {
   Plastic: "plastic",
   Paper: "paper",
   Biowaste: "biowaste",
   ResidualWaste: "residualWaste",
   Glass: "glass",
-};
+}; */
 
 let currentItemsCollection = []; //current collection for current level
 const itemCollections = [[]]; //all item collections
@@ -33,8 +33,8 @@ function fillItemCollection(gameThis, amountOfItems, wasteType) {
 }
 
 function fillAllCollections(gameThis) {
-  plasticItemCollection = fillItemCollection(gameThis, amountOfItems_plastic, typeOfWaste.Plastic).slice();
-  biowasteItemCollection = fillItemCollection(gameThis, amountOfItems_biowaste, typeOfWaste.Biowaste).slice();
+  plasticItemCollection = fillItemCollection(gameThis, amountOfItems_plastic, typesOfWaste.Plastic).slice();
+  biowasteItemCollection = fillItemCollection(gameThis, amountOfItems_biowaste, typesOfWaste.Biowaste).slice();
   itemCollections.push(plasticItemCollection);
   itemCollections.push(biowasteItemCollection);
   itemCollections.shift();
@@ -52,11 +52,11 @@ class MainScene extends Phaser.Scene {
   }
   preload() {
     for (let i = 0; i < amountOfItems_plastic; i++) {
-      this.load.image(typeOfWaste.Plastic + i, "assets/images/Plastic/" + typeOfWaste.Plastic + i + ".png");
+      this.load.image(typesOfWaste.Plastic + i, "assets/images/Plastic/" + typesOfWaste.Plastic + i + ".png");
     }
 
     for (let i = 0; i < amountOfItems_biowaste; i++) {
-      this.load.image(typeOfWaste.Biowaste + i, "assets/images/Biowaste/" + typeOfWaste.Biowaste + i + ".png");
+      this.load.image(typesOfWaste.Biowaste + i, "assets/images/Biowaste/" + typesOfWaste.Biowaste + i + ".png");
     }
 
     this.gameTimer = this.scene.get("Gametimer");
@@ -134,8 +134,15 @@ class MainScene extends Phaser.Scene {
     let boundsOfRightField = this.gameFieldScene.rightField.getBounds();
     let boundsOfLeftField = this.gameFieldScene.leftField.getBounds();
     if (Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfRightField)) {
+      this.checkItem();
       this.emitter.emit(cons.ITEM_UPDATED);
       this.timedEvent = this.time.delayedCall(50, this.updateItem, [], this);
     }
   }
+
+  checkItem() {
+    console.log( this.currentActiveItem.wasteType === model.currentLevel.typeOfWaste);
+    return this.currentActiveItem.wasteType === model.currentLevel.typeOfWaste;
+  }
+
 }
