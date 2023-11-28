@@ -23,9 +23,11 @@ class Model {
     return this._score;
   }
 
+
   set currentGameLevel(level) {
     this._currentGameLevel = level;
     EventDispatcher.getInstance().emit(cons.LEVEL_UPDATED);
+    this.score = 0;
   }
 
   get currentGameLevel() {

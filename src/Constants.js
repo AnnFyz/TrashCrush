@@ -22,6 +22,7 @@ class Constants {
     this.SCORE_UPDATED = "scoreUpdated";
     this.ITEM_UPDATED = "itemUpdated";
     this.LEVEL_UPDATED = "levelUpdated";
+    this.UP_LEVELINDEX = "upLevelIndex";
     this.SWIPE_RIGHT = "swipeRight";
     this.SWIPE_LEFT = "swipeLeft";
   }

@@ -14,7 +14,7 @@ window.onload = function () {
     width: width * stageScale,
     height: height * stageScale,
     scale: {
-      mode: Phaser.Scale.RESIZE,
+      mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH,
       width: width * stageScale,
       height: height * stageScale,

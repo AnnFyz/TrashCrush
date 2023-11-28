@@ -37,7 +37,6 @@ function fillAllCollections(gameThis) {
   biowasteItemCollection = fillItemCollection(gameThis, amountOfItems_biowaste, typesOfWaste.Biowaste).slice();
   itemCollections.push(plasticItemCollection);
   itemCollections.push(biowasteItemCollection);
-  itemCollections.shift();
   amountOfCollections = itemCollections.length;
 }
 
@@ -71,6 +70,7 @@ class MainScene extends Phaser.Scene {
     this.sb.x = game.config.width / 2;
     this.sb.y = 45;
     fillAllCollections(this);
+    itemCollections.shift();
     this.updateCurrentCollection();
     this.activateItem();
     this.timedEvent = this.time.addEvent({ delay: 250, callback: this.checkOverlap, callbackScope: this, loop: true });
@@ -79,7 +79,7 @@ class MainScene extends Phaser.Scene {
   updateLevel() {
     if (itemCollections.length == 0) {
       console.log("UpdateLevel");
-      this.emitter.emit(cons.LEVEL_UPDATED, model.levelIndex + 1);
+      this.emitter.emit(cons.UP_LEVELINDEX, model.levelIndex + 1);
       fillAllCollections(this);
       this.updateCurrentCollection();
       this.activateItem();

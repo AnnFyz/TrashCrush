@@ -3,7 +3,7 @@ class GameController {
     EventDispatcher.getInstance().on(cons.SET_SCORE, this.setScore);
     EventDispatcher.getInstance().on(cons.UP_POINTS, this.upPoints);
     EventDispatcher.getInstance().on(cons.DOWN_POINTS, this.downPoints);
-    EventDispatcher.getInstance().on(cons.LEVEL_UPDATED, this.updateLevel);
+    EventDispatcher.getInstance().on(cons.UP_LEVELINDEX, this.updateIndex);
   }
 
   setScore(score) {
@@ -22,11 +22,10 @@ class GameController {
     model.score = score;
   }
 
-  updateLevel(index) {
+  updateIndex(index) {
 
       console.log("levelIndex " + index);
       model.currentGameLevel = gameLevels[index];
-      EventDispatcher.getInstance().off(cons.LEVEL_UPDATED, this.updateLevel);
    /*  }
     else{
       console.log("THE END");
