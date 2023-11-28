@@ -4,6 +4,7 @@ class Scorebox extends Phaser.GameObjects.Container {
     this.scene = config.scene;
     //
     this.text1 = this.scene.add.text(0, 0, "SCORE:0");
+    this.text1.setFontSize(50);
     this.text1.setOrigin(0.5, 0.5);
     this.add(this.text1); // to add text to the container
     this.scene.add.existing(this); // to add container to the scene
