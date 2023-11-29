@@ -24,7 +24,6 @@ class GameController {
 
   updateIndex(index) {
 
-      console.log("levelIndex " + index);
       model.currentGameLevel = gameLevels[index];
    /*  }
     else{

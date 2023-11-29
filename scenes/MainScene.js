@@ -4,16 +4,10 @@ let plasticItemCollection = [];
 let biowasteItemCollection = [];
 let index = 0;
 let amountOfCollections;
-/* const typeOfWaste = {
-  Plastic: "plastic",
-  Paper: "paper",
-  Biowaste: "biowaste",
-  ResidualWaste: "residualWaste",
-  Glass: "glass",
-}; */
+
 
 let currentItemsCollection = []; //current collection for current level
-const itemCollections = [[]]; //all item collections
+const itemCollections = []; //all item collections
 
 // in collection will be stored items
 function fillItemCollection(gameThis, amountOfItems, wasteType) {
@@ -63,14 +57,15 @@ class MainScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.bringToTop("Gametimer");
+    this.scale.on("resize", this.resize, this);
+    //this.scene.bringToTop("Gametimer");
     this.emitter = EventDispatcher.getInstance();
     this.controller = new GameController();
     this.sb = new Scorebox({ scene: this });
     this.sb.x = game.config.width / 2;
     this.sb.y = 45;
     fillAllCollections(this);
-    itemCollections.shift();
+    //itemCollections.shift();
     this.updateCurrentCollection();
     this.activateItem();
     this.timedEvent = this.time.addEvent({ delay: 250, callback: this.checkOverlap, callbackScope: this, loop: true });
@@ -78,7 +73,6 @@ class MainScene extends Phaser.Scene {
 
   updateLevel() {
     if (itemCollections.length == 0) {
-      console.log("UpdateLevel");
       this.emitter.emit(cons.UP_LEVELINDEX, model.levelIndex + 1);
       fillAllCollections(this);
       this.updateCurrentCollection();
@@ -181,8 +175,17 @@ class MainScene extends Phaser.Scene {
   }
 
   checkItem() {
-    console.log(this.currentActiveItem.wasteType === model.currentGameLevel.typeOfWaste);
     return this.currentActiveItem.wasteType === model.currentGameLevel.typeOfWaste;
+  }
+
+  resize(gameSize, baseSize, displaySize, resolution) {
+    const cwidth = gameSize.width;
+    const cheight = gameSize.height;
+
+    this.cameras.resize(cwidth, cheight);
+    console.log("gameSize " + gameSize);
+    //this.bg.setSize(width, height);
+    //this.activateItem.setPosition(cwidth / 2, cheight / 2);
   }
 }
  

@@ -1,5 +1,5 @@
-var width = gameConfig.screenResolution.width;
-var height = gameConfig.screenResolution.height;
+//var width = gameConfig.screenResolution.width;
+//var height = gameConfig.screenResolution.height;
 var centerX = 0.5;
 var centerY = 0.5;
 var stageScale = gameConfig.ratio;
@@ -7,19 +7,25 @@ var cons;
 var game;
 var model;
 var gameLevels;
+var objectsToResize = [];
 
 window.onload = function () {
   const config = {
     type: Phaser.AUTO,
-    width: width * stageScale,
-    height: height * stageScale,
     scale: {
-      mode: Phaser.Scale.FIT,
-      autoCenter: Phaser.Scale.CENTER_BOTH,
-      width: width * stageScale,
-      height: height * stageScale,
+      mode: Phaser.Scale.RESIZE,
+      parent: "phaser-example",
+      width: "100%",
+      height: "100%",
+      min: {
+        width: 800,
+        height: 600,
+      },
+      max: {
+        width: 1600,
+        height: 1200,
+      },
     },
-
     physics: {
       default: "matter",
     },
@@ -28,7 +34,7 @@ window.onload = function () {
       target: 30,
       forceSetTimeOut: true,
     },
-    scene: [GameField, MainScene, Gametimer, MainMenuScene],
+    scene: [GameField, MainScene, Gametimer, MainMenuScene, UILayer],
   };
 
   game = new Phaser.Game(config);
@@ -38,7 +44,7 @@ window.onload = function () {
 
 // screen size calc for responsive app
 
-var rApp = {
+/* var rApp = {
   centerX: centerX,
   centerY: centerY,
   defaultWidth: width,
@@ -60,4 +66,4 @@ var rApp = {
     console.log(this.zoom, this.left, this.top, this.right, this.bottom);
   },
 };
-rApp.update();
+rApp.update(); */
