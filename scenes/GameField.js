@@ -2,8 +2,6 @@ class GameField extends Phaser.Scene {
   constructor() {
     super("GameField");
     EventDispatcher.getInstance().on(cons.LEVEL_UPDATED, this.colorUpdated, this);
-    
-
   }
   preload() {}
   init() {
@@ -11,8 +9,7 @@ class GameField extends Phaser.Scene {
     this.rightField;
   }
   create() {
-    this.scene.launch("MainScene");
-    this.scale.on('resize', this.resize, this);
+    this.scale.on("resize", this.resize, this);
     this.leftField = this.add.rectangle(
       0,
       0,
@@ -32,16 +29,14 @@ class GameField extends Phaser.Scene {
     this.rightField.setOrigin(1, 0);
     Align.scaleToGameWHor(this.leftField, 0.25, this.sys.game.canvas);
     Align.scaleToGameWHor(this.rightField, 0.25, this.sys.game.canvas);
-
+    this.scene.launch("MainScene");
   }
 
   resize() {
     Align.scaleToGameWHor(this.leftField, 0.25, this.sys.game.canvas);
     Align.scaleToGameWHor(this.rightField, 0.25, this.sys.game.canvas);
-    this.leftField.setPosition(  0,
-      0);
-    this.rightField.setPosition(  this.sys.game.canvas.width,
-      0);
+    this.leftField.setPosition(0, 0);
+    this.rightField.setPosition(this.sys.game.canvas.width, 0);
   }
 
   colorUpdated() {

@@ -15,8 +15,8 @@ function fillItemCollection(gameThis, amountOfItems, wasteType) {
   for (let i = 0; i < amountOfItems; i++) {
     let item = new Item({
       scene: gameThis,
-      x: game.config.width / 2,
-      y: game.config.height / 2,
+      x: gameThis.game.canvas.width / 2,
+      y: gameThis.game.canvas.height / 2,
       key: wasteType + i,
       index: i,
       wasteType,
@@ -61,13 +61,12 @@ class MainScene extends Phaser.Scene {
     //this.scene.bringToTop("Gametimer");
     this.emitter = EventDispatcher.getInstance();
     this.controller = new GameController();
-    this.sb = new Scorebox({ scene: this });
-    this.sb.x = this.sys.game.canvas.width/2;
-    this.sb.y = this.sys.game.canvas.height/9;
     fillAllCollections(this);
-    //itemCollections.shift();
     this.updateCurrentCollection();
     this.activateItem();
+    this.sb = new Scorebox({ scene: this });
+    this.sb.x = this.sys.game.canvas.width / 2;
+    this.sb.y = this.sys.game.canvas.height / 9;
     this.timedEvent = this.time.addEvent({ delay: 250, callback: this.checkOverlap, callbackScope: this, loop: true });
   }
 
@@ -188,6 +187,5 @@ class MainScene extends Phaser.Scene {
 
     this.cameras.resize(cwidth, cheight);
   }
-
 }
  
