@@ -19,12 +19,13 @@ class Item extends Phaser.GameObjects.Sprite {
       this.scene.input.on("drag", this.moveItem, this);
     });
     config.scene.input.on("dragend", this.resetPos, this, config.x, config.y);
-
-    EventDispatcher.getInstance().on(cons.ITEM_UPDATED, () => {this.swapeRight() });
-
+    config.scene.scale.on('resize', this.resetPos, this);
+    EventDispatcher.getInstance().on(cons.ITEM_UPDATED, () => {
+      this.swapeRight();
+    });
   }
 
-  swapeRight() {
+  swapeRight(gameSize) {
     this.resetPos();
     this.deactivateItem();
   }
@@ -34,7 +35,8 @@ class Item extends Phaser.GameObjects.Sprite {
   }
 
   resetPos() {
-    this.setPosition(game.config.width / 2, game.config.height / 2);
+    Align.scaleToGameW(this.scene.currentActiveItem, 0.25, this.scene.sys.game.canvas);
+    this.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 2);
   }
 
   deactivateItem() {

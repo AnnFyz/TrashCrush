@@ -1,20 +1,24 @@
 class Align {
-    static scaleToGameW(obj, per) {
-        obj.displayWidth = game.config.width * per;
-        obj.scaleY = obj.scaleX;
-    }
+  static scaleToGameW(obj, per, scale) {
+    obj.displayWidth = scale.width * per;
+    obj.scaleY = obj.scaleX;
+  }
 
-    static center(obj) {
-        obj.x = game.config.width / 2;
-        obj.y = game.config.height / 2;
-    }
+  static scaleToGameWHor(obj, per, scale) {
+    obj.displayWidth = scale.width * per;
+    //obj.scaleY = obj.scaleX;
+  }
 
-    static centerX(obj) {
-        obj.x = game.config.width / 2;
+  static center(obj, scale) {
+    obj.x = scale.width / 2;
+    obj.y = scale.height / 2;
+  }
 
-    }
+  static centerX(obj, scale) {
+    obj.x = scale.width / 2;
+  }
 
-    static centerY(obj) {
-        obj.y = game.config.height / 2;
-    }
+  static centerY(obj, scale) {
+    obj.y = scale.height / 2;
+  }
 }

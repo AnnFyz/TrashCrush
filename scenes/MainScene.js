@@ -62,8 +62,8 @@ class MainScene extends Phaser.Scene {
     this.emitter = EventDispatcher.getInstance();
     this.controller = new GameController();
     this.sb = new Scorebox({ scene: this });
-    this.sb.x = game.config.width / 2;
-    this.sb.y = 45;
+    this.sb.x = this.sys.game.canvas.width/2;
+    this.sb.y = this.sys.game.canvas.height/9;
     fillAllCollections(this);
     //itemCollections.shift();
     this.updateCurrentCollection();
@@ -83,7 +83,8 @@ class MainScene extends Phaser.Scene {
   activateItem() {
     let tempItemCol = shuffle(currentItemsCollection);
     this.currentActiveItem = tempItemCol[0];
-    Align.scaleToGameW(this.currentActiveItem, 0.25);
+    Align.scaleToGameW(this.currentActiveItem, 0.25, this.sys.game.canvas);
+    //this.currentActiveItem.setPosition(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2);
     this.currentActiveItem.activateItem();
   }
 
@@ -166,9 +167,12 @@ class MainScene extends Phaser.Scene {
     let boundsOfRightField = this.gameFieldScene.rightField.getBounds();
     let boundsOfLeftField = this.gameFieldScene.leftField.getBounds();
     if (Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfRightField)) {
+      console.log("Overlap");
       this.emitter.emit(cons.ITEM_UPDATED);
+      this.currentActiveItem.setPosition(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2);
       this.timedEvent = this.time.delayedCall(50, this.swipeRight, [], this);
     } else if (Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfLeftField)) {
+      console.log("Overlap");
       this.emitter.emit(cons.ITEM_UPDATED);
       this.timedEvent = this.time.delayedCall(50, this.swipeLeft, [], this);
     }
@@ -183,9 +187,7 @@ class MainScene extends Phaser.Scene {
     const cheight = gameSize.height;
 
     this.cameras.resize(cwidth, cheight);
-    console.log("gameSize " + gameSize);
-    //this.bg.setSize(width, height);
-    //this.activateItem.setPosition(cwidth / 2, cheight / 2);
   }
+
 }
  
