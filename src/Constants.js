@@ -25,5 +25,6 @@ class Constants {
     this.UP_LEVELINDEX = "upLevelIndex";
     this.SWIPE_RIGHT = "swipeRight";
     this.SWIPE_LEFT = "swipeLeft";
+    this.END_Game = "endGame";
   }
 }

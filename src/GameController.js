@@ -22,12 +22,10 @@ class GameController {
     model.score = score;
   }
 
-  updateIndex(index) {
-
+  updateIndex() {
+    console.log("index " + model.levelIndex);
+    if (model.levelIndex <= gameLevels.length) {
       model.currentGameLevel = gameLevels[index];
-   /*  }
-    else{
-      console.log("THE END");
-    } */
+    }
   }
 }

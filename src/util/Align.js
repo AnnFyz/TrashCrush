@@ -21,4 +21,8 @@ class Align {
   static centerY(obj, scale) {
     obj.y = scale.height / 2;
   }
+
+  static alignToGameWVer(obj, scale, proportion) {
+    obj.y = scale.height / proportion;
+  }
 }

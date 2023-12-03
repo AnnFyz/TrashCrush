@@ -25,9 +25,14 @@ class Model {
 
 
   set currentGameLevel(level) {
-    this._currentGameLevel = level;
-    EventDispatcher.getInstance().emit(cons.LEVEL_UPDATED);
-    this.score = 0;
+    if (this._levelIndex >= gameLevels.length) {
+      console.log("no more levels");
+      return;
+    } else {
+      this._currentGameLevel = level;
+      EventDispatcher.getInstance().emit(cons.LEVEL_UPDATED);
+      this.score = 0;
+    }
   }
 
   get currentGameLevel() {
@@ -35,6 +40,11 @@ class Model {
   }
 
   set levelIndex(ind){
+  if (this._levelIndex >= gameLevels.length) {
+    EventDispatcher.getInstance().emit(cons.END_GAME);
+    this.scene.start("EndScene");
+    return;
+  }
     this._levelIndex = ind;    
   }
 

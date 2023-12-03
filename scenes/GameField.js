@@ -2,6 +2,7 @@ class GameField extends Phaser.Scene {
   constructor() {
     super("GameField");
     EventDispatcher.getInstance().on(cons.LEVEL_UPDATED, this.colorUpdated, this);
+    EventDispatcher.getInstance().on(cons.END_GAME, this.handleGameEnd, this);
   }
   preload() {}
   init() {
@@ -42,5 +43,9 @@ class GameField extends Phaser.Scene {
   colorUpdated() {
     this.leftField.fillColor = model._currentGameLevel.fieldColor;
     this.rightField.fillColor = model._currentGameLevel.fieldColor;
+  }
+
+  handleGameEnd(){
+    EventDispatcher.getInstance().off(cons.LEVEL_UPDATED, this.colorUpdated, this);
   }
 }

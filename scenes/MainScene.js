@@ -72,7 +72,7 @@ class MainScene extends Phaser.Scene {
 
   updateLevel() {
     if (itemCollections.length == 0) {
-      this.emitter.emit(cons.UP_LEVELINDEX, model.levelIndex + 1);
+      this.emitter.emit(cons.UP_LEVELINDEX, (model.levelIndex += 1));
       fillAllCollections(this);
       this.updateCurrentCollection();
       this.activateItem();
