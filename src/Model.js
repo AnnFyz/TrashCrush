@@ -40,8 +40,9 @@ class Model {
   }
 
   set levelIndex(ind){
-  if (this._levelIndex >= gameLevels.length) {
+  if (this._levelIndex >= Object.keys(gameLevels).length) {
     EventDispatcher.getInstance().emit(cons.END_GAME);
+    console.log("EndScene");
     this.scene.start("EndScene");
     return;
   }

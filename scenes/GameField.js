@@ -31,13 +31,14 @@ class GameField extends Phaser.Scene {
     Align.scaleToGameWHor(this.leftField, 0.25, this.sys.game.canvas);
     Align.scaleToGameWHor(this.rightField, 0.25, this.sys.game.canvas);
     this.scene.launch("MainScene");
+    EventDispatcher.getInstance().on(cons.END_GAME, this.startEndScene, this);
   }
 
-  resize() {
-    Align.scaleToGameWHor(this.leftField, 0.25, this.sys.game.canvas);
-    Align.scaleToGameWHor(this.rightField, 0.25, this.sys.game.canvas);
+  resize(gameSize) {
+    Align.scaleToGameWHor(this.leftField, 0.25, gameSize);
+    Align.scaleToGameWHor(this.rightField, 0.25, gameSize);
     this.leftField.setPosition(0, 0);
-    this.rightField.setPosition(this.sys.game.canvas.width, 0);
+    this.rightField.setPosition(gameSize.width, 0);
   }
 
   colorUpdated() {
@@ -45,7 +46,11 @@ class GameField extends Phaser.Scene {
     this.rightField.fillColor = model._currentGameLevel.fieldColor;
   }
 
-  handleGameEnd(){
+  handleGameEnd() {
     EventDispatcher.getInstance().off(cons.LEVEL_UPDATED, this.colorUpdated, this);
+  }
+
+  startEndScene() {
+    this.scene.start("EndScene");
   }
 }

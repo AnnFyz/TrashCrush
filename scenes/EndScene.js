@@ -8,6 +8,7 @@ class EndScene extends Phaser.Scene {
   }
   create() {
     this.emitter = EventDispatcher.getInstance();
+    //this.emitter.on(cons.END_GAME, this.startEndScene, this);
     let startButton = new Button({
       scene: this,
       key: "button",
@@ -28,6 +29,7 @@ class EndScene extends Phaser.Scene {
 
   clickStartButton() {
     console.log("Restart");
+    this.scene.start("MainMenuScene");
   }
 
   resizeText() {
@@ -35,4 +37,8 @@ class EndScene extends Phaser.Scene {
     Align.centerX(this.text1, this.sys.game.canvas);
     Align.alignToGameWVer(this.text1, this.sys.game.canvas, 9);
   }
+
+  /*   startEndScene() {
+    this.scene.start("EndScene");
+  } */
 }

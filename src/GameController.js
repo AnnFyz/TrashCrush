@@ -22,10 +22,16 @@ class GameController {
     model.score = score;
   }
 
-  updateIndex() {
-    console.log("index " + model.levelIndex);
-    if (model.levelIndex <= gameLevels.length) {
+  updateIndex(index) {
+    console.log("index " + index);
+    index++;
+    if (index < Object.keys(gameLevels).length) {
+      model.levelIndex = index;
       model.currentGameLevel = gameLevels[index];
+    } else {
+      EventDispatcher.getInstance().emit(cons.END_GAME);
+      console.log("EndScene");
+      return;
     }
   }
 }
