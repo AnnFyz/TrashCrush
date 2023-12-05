@@ -40,13 +40,13 @@ class Model {
   }
 
   set levelIndex(ind){
-  if (this._levelIndex >= Object.keys(gameLevels).length) {
+    /*   if (this._levelIndex >= Object.keys(gameLevels).length) {
     EventDispatcher.getInstance().emit(cons.END_GAME);
     console.log("EndScene");
     this.scene.start("EndScene");
     return;
-  }
-    this._levelIndex = ind;    
+  } */
+    this._levelIndex = ind;
   }
 
   get levelIndex(){

@@ -12,7 +12,7 @@ class EndScene extends Phaser.Scene {
     let startButton = new Button({
       scene: this,
       key: "button",
-      text: "start the game",
+      text: "restart the game",
       event: "click",
     });
     startButton.x = this.sys.game.canvas.width / 2;
@@ -29,6 +29,7 @@ class EndScene extends Phaser.Scene {
 
   clickStartButton() {
     console.log("Restart");
+    this.scene.stop("EndScene")
     this.scene.start("MainMenuScene");
   }
 

@@ -60,7 +60,6 @@ class MainScene extends Phaser.Scene {
     this.scale.on("resize", this.resize, this);
     //this.scene.bringToTop("Gametimer");
     this.emitter = EventDispatcher.getInstance();
-    this.emitter.on(cons.END_GAME, this.startEndScene, this);
     this.controller = new GameController();
     fillAllCollections(this);
     this.updateCurrentCollection();
@@ -191,8 +190,6 @@ class MainScene extends Phaser.Scene {
     // console.log("displaySize" + displaySize);
   }
 
-  startEndScene() {
-    this.scene.start("EndScene");
-  }
+
 }
  
