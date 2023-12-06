@@ -31,6 +31,8 @@ class GameController {
     } else {
       EventDispatcher.getInstance().emit(cons.END_GAME);
       console.log("EndScene");
+      model.levelIndex = 0;
+      model.currentGameLevel = gameLevels[0];
       return;
     }
   }

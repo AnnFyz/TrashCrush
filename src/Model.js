@@ -1,28 +1,24 @@
 class Model {
   constructor() {
     gameLevels = {
-      0 : { name: levels.PlasticLevel, typeOfWaste: typesOfWaste.Plastic, fieldColor: 0xe1ba07},
-      1 : { name: levels.BiowasteLevel, typeOfWaste: typesOfWaste.Biowaste, fieldColor: 0xe744200},
-
-  }
+      0: { name: levels.PlasticLevel, typeOfWaste: typesOfWaste.Plastic, fieldColor: 0xe1ba07 },
+      1: { name: levels.BiowasteLevel, typeOfWaste: typesOfWaste.Biowaste, fieldColor: 0xe744200 },
+    };
 
     this._score = 0;
     this._levelIndex = 0;
     this._currentGameLevel = gameLevels[this._levelIndex];
     console.log(this._currentGameLevel);
-   
-    
   }
 
   set score(val) {
     this._score = val;
-    EventDispatcher.getInstance().emit(cons.SCORE_UPDATED); 
+    EventDispatcher.getInstance().emit(cons.SCORE_UPDATED);
   }
 
   get score() {
     return this._score;
   }
-
 
   set currentGameLevel(level) {
     if (this._levelIndex >= gameLevels.length) {
@@ -39,18 +35,11 @@ class Model {
     return this._currentGameLevel;
   }
 
-  set levelIndex(ind){
-    /*   if (this._levelIndex >= Object.keys(gameLevels).length) {
-    EventDispatcher.getInstance().emit(cons.END_GAME);
-    console.log("EndScene");
-    this.scene.start("EndScene");
-    return;
-  } */
+  set levelIndex(ind) {
     this._levelIndex = ind;
   }
 
-  get levelIndex(){
-    return this._levelIndex;    
+  get levelIndex() {
+    return this._levelIndex;
   }
-
 }

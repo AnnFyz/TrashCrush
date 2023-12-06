@@ -19,13 +19,14 @@ class Item extends Phaser.GameObjects.Sprite {
       this.scene.input.on("drag", this.moveItem, this);
     });
     config.scene.input.on("dragend", this.resetPos, this, config.x, config.y);
-    config.scene.scale.on('resize', this.resetPos, this);
+    config.scene.scale.on("resize", this.resetPos, this);
     EventDispatcher.getInstance().on(cons.ITEM_UPDATED, () => {
       this.swapeRight();
     });
+    EventDispatcher.getInstance().on(cons.END_GAME, this.handleGameEnd, this);
   }
 
-  swapeRight(gameSize) {
+  swapeRight() {
     this.resetPos();
     this.deactivateItem();
   }
@@ -35,8 +36,10 @@ class Item extends Phaser.GameObjects.Sprite {
   }
 
   resetPos() {
-    Align.scaleToGameW(this.scene.currentActiveItem, 0.25, this.scene.sys.game.canvas);
-    this.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 2);
+    if(this.scene != undefined){
+      Align.scaleToGameW(this, 0.25, this.scene.sys.game.canvas);
+      this.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 2);
+    }
   }
 
   deactivateItem() {
@@ -45,5 +48,10 @@ class Item extends Phaser.GameObjects.Sprite {
 
   activateItem() {
     this.setActive(true).setVisible(true);
+  }
+
+  handleGameEnd() {
+    console.log("off resize item");
+    this.scene.scale.off("resize", this.resetPos, this);
   }
 }

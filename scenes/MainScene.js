@@ -58,9 +58,9 @@ class MainScene extends Phaser.Scene {
 
   create() {
     this.scale.on("resize", this.resize, this);
-    //this.scene.bringToTop("Gametimer");
     this.emitter = EventDispatcher.getInstance();
     this.controller = new GameController();
+    this.emitter.on(cons.END_GAME, this.handleGameEnd, this);
     fillAllCollections(this);
     this.updateCurrentCollection();
     this.activateItem();
@@ -186,10 +186,16 @@ class MainScene extends Phaser.Scene {
     const cheight = gameSize.height;
 
     this.cameras.resize(cwidth, cheight);
-    //console.log("gameSize" + gameSize);
-    // console.log("displaySize" + displaySize);
   }
 
+  handleGameEnd(){
+    this.scale.off("resize", this.resize, this);
+    if (itemCollections.length == 0) {
+      fillAllCollections(this);
+      this.updateCurrentCollection();
+      this.activateItem();
+    }
+  }
 
 }
  

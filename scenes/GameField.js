@@ -10,6 +10,7 @@ class GameField extends Phaser.Scene {
     this.rightField;
   }
   create() {
+    console.log("GameField was started");
     this.scale.on("resize", this.resize, this);
     this.leftField = this.add.rectangle(
       0,
@@ -51,6 +52,7 @@ class GameField extends Phaser.Scene {
   }
 
   startEndScene() {
+    this.scene.stop("MainScene");
     this.scene.start("EndScene");
   }
 }
