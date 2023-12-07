@@ -9,8 +9,6 @@ class MainMenuScene extends Phaser.Scene {
     this.load.image("button", "assets/ui_images/Button_1.svg");
   }
   create() {
-    this.scene.stop("GameField");
-    this.scene.stop("MainScene");
     this.emitter = EventDispatcher.getInstance();
     let startButton = new Button({
       scene: this,
@@ -19,7 +17,7 @@ class MainMenuScene extends Phaser.Scene {
       event: "click",
     });
     startButton.x = this.sys.game.canvas.width / 2;
-    startButton.y = this.sys.game.canvas.height / 2;
+    startButton.y = this.sys.game.canvas.height / 1.3;
     this.emitter.on("click", this.clickStartButton, this);
     this.scale.on("resize", this.resizeText, this);
     this.text1 = this.add.text(0, 0, "Main Menu");
@@ -31,10 +29,10 @@ class MainMenuScene extends Phaser.Scene {
   }
 
   clickStartButton() {
-    this.scale.off("resize", this.resizeText, this);
-    this.scene.start("GameField");
-    //this.scene.launch("MainScene");
-
+    this.emitter.off("click", this.clickStartButton, this);
+    console.log("Click start button");
+    this.scene.start("MainScene");
+    this.scene.bringToTop("GameField");
   }
 
   resizeText() {

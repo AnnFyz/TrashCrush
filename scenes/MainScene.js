@@ -57,6 +57,8 @@ class MainScene extends Phaser.Scene {
   }
 
   create() {
+    this.scene.launch("GameField");
+    this.scene.sendToBack("GameField");
     this.scale.on("resize", this.resize, this);
     this.emitter = EventDispatcher.getInstance();
     this.controller = new GameController();
@@ -76,7 +78,8 @@ class MainScene extends Phaser.Scene {
       fillAllCollections(this);
       this.updateCurrentCollection();
       this.activateItem();
-    }
+      }
+   
   }
 
   activateItem() {
@@ -188,14 +191,14 @@ class MainScene extends Phaser.Scene {
     this.cameras.resize(cwidth, cheight);
   }
 
-  handleGameEnd(){
+  handleGameEnd() {
     this.scale.off("resize", this.resize, this);
-    if (itemCollections.length == 0) {
-      fillAllCollections(this);
-      this.updateCurrentCollection();
-      this.activateItem();
-    }
+    this.startEndScene();
   }
 
+  startEndScene() {
+    this.scene.stop("GameField");
+    this.scene.start("EndScene");
+  }
 }
  

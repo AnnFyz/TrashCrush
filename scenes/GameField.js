@@ -10,7 +10,6 @@ class GameField extends Phaser.Scene {
     this.rightField;
   }
   create() {
-    console.log("GameField was started");
     this.scale.on("resize", this.resize, this);
     this.leftField = this.add.rectangle(
       0,
@@ -31,8 +30,6 @@ class GameField extends Phaser.Scene {
     this.rightField.setOrigin(1, 0);
     Align.scaleToGameWHor(this.leftField, 0.25, this.sys.game.canvas);
     Align.scaleToGameWHor(this.rightField, 0.25, this.sys.game.canvas);
-    this.scene.launch("MainScene");
-    EventDispatcher.getInstance().on(cons.END_GAME, this.startEndScene, this);
   }
 
   resize(gameSize) {
@@ -49,10 +46,5 @@ class GameField extends Phaser.Scene {
 
   handleGameEnd() {
     EventDispatcher.getInstance().off(cons.LEVEL_UPDATED, this.colorUpdated, this);
-  }
-
-  startEndScene() {
-    this.scene.stop("MainScene");
-    this.scene.start("EndScene");
   }
 }

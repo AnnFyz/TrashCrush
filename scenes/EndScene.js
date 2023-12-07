@@ -27,6 +27,7 @@ class EndScene extends Phaser.Scene {
   }
 
   clickRestartButton() {
+    this.emitter.off("click", this.clickRestartButton, this);
     this.scale.off("resize", this.resizeText, this);
     console.log("Restart");
     this.scene.start("MainMenuScene");
