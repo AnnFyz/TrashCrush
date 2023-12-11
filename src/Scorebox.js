@@ -15,7 +15,12 @@ class Scorebox extends Phaser.GameObjects.Container {
   }
 
   scoreUpdated() {
-    this.text1.setText("SCORE:" + model.score);
+    //if (this.text1 != undefined)
+    try {
+      this.text1.setText("SCORE:" + model.score);
+    } catch (error) {
+      log("error " + error);
+    }
   }
 
   resize() {
@@ -28,6 +33,8 @@ class Scorebox extends Phaser.GameObjects.Container {
 
   handleGameEnd(){
     this.scene.scale.off("resize", this.resize, this);
+    //EventDispatcher.getInstance().off(cons.SCORE_UPDATED, this.scoreUpdated, this);
+    this.destroy();
   }
 
 }

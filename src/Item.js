@@ -36,7 +36,8 @@ class Item extends Phaser.GameObjects.Sprite {
   }
 
   resetPos() {
-    if(this.scene != undefined){
+    // to change the name
+    if (this.scene != undefined) {
       Align.scaleToGameW(this, 0.25, this.scene.sys.game.canvas);
       this.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 2);
     }
@@ -52,6 +53,21 @@ class Item extends Phaser.GameObjects.Sprite {
 
   handleGameEnd() {
     console.log("off resize item");
-    this.scene.scale.off("resize", this.resetPos, this);
+    if (this.scene != undefined) {
+      this.scene.scale.off("resize", this.resetPos, this);
+      this.on("pointerout", () => {
+        this.scene.input.off("drag", this.moveItem, this);
+      });
+      this.off("pointerover", () => {
+        this.resetPos();
+        this.scene.input.off("drag", this.moveItem, this);
+      });
+      this.scene.input.off("dragend", this.resetPos, this, this.x, this.y);
+      this.scene.scale.off("resize", this.resetPos, this);
+      EventDispatcher.getInstance().off(cons.ITEM_UPDATED, () => {
+        this.swapeRight();
+      });
+    }
+    this.destroy();
   }
 }

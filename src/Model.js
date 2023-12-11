@@ -42,4 +42,11 @@ class Model {
   get levelIndex() {
     return this._levelIndex;
   }
+
+  resetModel() {
+    this._score = 0;
+    this._levelIndex = 0;
+    this._currentGameLevel = gameLevels[this._levelIndex];
+    console.log("resetModel");
+  }
 }

@@ -42,6 +42,7 @@ class MainScene extends Phaser.Scene {
   init() {
     this.currentActiveItem;
     this.gameFieldScene;
+    this.sb;
   }
   preload() {
     for (let i = 0; i < amountOfItems_plastic; i++) {
@@ -57,9 +58,13 @@ class MainScene extends Phaser.Scene {
   }
 
   create() {
+    itemCollections.splice(0, itemCollections.length);
+    currentItemsCollection = [];
+    this.currentActiveItem = undefined;
+
+    
     this.scale.on("resize", this.resize, this);
     this.emitter = EventDispatcher.getInstance();
-    this.controller = new GameController();
     this.emitter.on(cons.END_GAME, this.handleGameEnd, this);
     fillAllCollections(this);
     this.updateCurrentCollection();
@@ -189,12 +194,8 @@ class MainScene extends Phaser.Scene {
   }
 
   handleGameEnd(){
+    this.emitter.off(cons.END_GAME, this.handleGameEnd, this);
     this.scale.off("resize", this.resize, this);
-    if (itemCollections.length == 0) {
-      fillAllCollections(this);
-      this.updateCurrentCollection();
-      this.activateItem();
-    }
   }
 
 }

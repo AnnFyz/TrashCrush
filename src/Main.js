@@ -40,6 +40,8 @@ window.onload = function () {
   game = new Phaser.Game(config);
   model = new Model();
   cons = new Constants();
+  controller = new GameController();
+
 };
 
 // screen size calc for responsive app
