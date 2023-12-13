@@ -15,11 +15,11 @@ class Item extends Phaser.GameObjects.Sprite {
       this.scene.input.off("drag", this.moveItem, this);
     });
     this.on("pointerover", () => {
-      this.resetPos();
+      this.resize();
       this.scene.input.on("drag", this.moveItem, this);
     });
-    config.scene.input.on("dragend", this.resetPos, this, config.x, config.y);
-    config.scene.scale.on("resize", this.resetPos, this);
+    config.scene.input.on("dragend", this.resize, this, config.x, config.y);
+    config.scene.scale.on("resize", this.resize, this);
     EventDispatcher.getInstance().on(cons.ITEM_UPDATED, () => {
       this.swapeRight();
     });
@@ -27,7 +27,7 @@ class Item extends Phaser.GameObjects.Sprite {
   }
 
   swapeRight() {
-    this.resetPos();
+    this.resize();
     this.deactivateItem();
   }
 
@@ -35,8 +35,7 @@ class Item extends Phaser.GameObjects.Sprite {
     this.setPosition(game.input.mousePointer.x, game.input.mousePointer.y);
   }
 
-  resetPos() {
-    // to change the name
+  resize() {
     if (this.scene != undefined) {
       Align.scaleToGameW(this, 0.25, this.scene.sys.game.canvas);
       this.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 2);
@@ -54,16 +53,16 @@ class Item extends Phaser.GameObjects.Sprite {
   handleGameEnd() {
     console.log("off resize item");
     if (this.scene != undefined) {
-      this.scene.scale.off("resize", this.resetPos, this);
+      this.scene.scale.off("resize", this.resize, this);
       this.on("pointerout", () => {
         this.scene.input.off("drag", this.moveItem, this);
       });
       this.off("pointerover", () => {
-        this.resetPos();
+        this.resize();
         this.scene.input.off("drag", this.moveItem, this);
       });
-      this.scene.input.off("dragend", this.resetPos, this, this.x, this.y);
-      this.scene.scale.off("resize", this.resetPos, this);
+      this.scene.input.off("dragend", this.resize, this, this.x, this.y);
+      this.scene.scale.off("resize", this.resize, this);
       EventDispatcher.getInstance().off(cons.ITEM_UPDATED, () => {
         this.swapeRight();
       });

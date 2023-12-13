@@ -62,7 +62,6 @@ class MainScene extends Phaser.Scene {
     currentItemsCollection = [];
     this.currentActiveItem = undefined;
 
-    
     this.scale.on("resize", this.resize, this);
     this.emitter = EventDispatcher.getInstance();
     this.emitter.on(cons.END_GAME, this.handleGameEnd, this);
@@ -88,7 +87,6 @@ class MainScene extends Phaser.Scene {
     let tempItemCol = shuffle(currentItemsCollection);
     this.currentActiveItem = tempItemCol[0];
     Align.scaleToGameW(this.currentActiveItem, 0.25, this.sys.game.canvas);
-    //this.currentActiveItem.setPosition(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2);
     this.currentActiveItem.activateItem();
   }
 

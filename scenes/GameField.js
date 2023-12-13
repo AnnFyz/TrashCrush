@@ -48,8 +48,6 @@ class GameField extends Phaser.Scene {
   }
 
   handleGameEnd() {
-    //EventDispatcher.getInstance().off(cons.LEVEL_UPDATED, this.colorUpdated, this);
-    //EventDispatcher.getInstance().off(cons.END_GAME, this.handleGameEnd, this);
     this.scale.off("resize", this.resize, this);
   }
 

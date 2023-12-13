@@ -28,7 +28,6 @@ class Button extends Phaser.GameObjects.Container {
     }
 
     this.scene.scale.on("resize", this.resize, this);
-    EventDispatcher.getInstance().on(cons.END_GAME, this.handleGameEnd, this);
     this.scene.add.existing(this);
   }
 
@@ -42,14 +41,7 @@ class Button extends Phaser.GameObjects.Container {
   }
 
   resize() {
-    if (this.scene != undefined) {
-      this.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 2);
-    }
+    this.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 2);
   }
 
-  handleGameEnd() {
-    if (this.scene !== undefined) {
-      this.scene.scale.off("resize", this.resize, this);
-    }
-  }
 }

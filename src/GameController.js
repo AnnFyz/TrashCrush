@@ -28,15 +28,18 @@ class GameController {
     if (index < Object.keys(gameLevels).length) {
       model.levelIndex = index;
       model.currentGameLevel = gameLevels[index];
-    } else if (index == Object.keys(gameLevels).length) {
+    } 
+    checkIfItTheEnd();
+    }
+  
+
+  checkIfItTheEnd(){
+    if (index == Object.keys(gameLevels).length) {
       EventDispatcher.getInstance().emit(cons.END_GAME);
       console.log("EndScene");
-      model.resetModel();
-      //EventDispatcher.getInstance().off(cons.SET_SCORE, this.setScore);
-      //EventDispatcher.getInstance().off(cons.UP_POINTS, this.upPoints);
-      //EventDispatcher.getInstance().off(cons.DOWN_POINTS, this.downPoints);
-      //EventDispatcher.getInstance().off(cons.UP_LEVELINDEX, this.updateIndex);
-      return;
+      return true;
+    } else {
+      return false;
     }
   }
 }
