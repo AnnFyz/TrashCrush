@@ -53,11 +53,11 @@ class MainScene extends Phaser.Scene {
       this.load.image(typesOfWaste.Biowaste + i, "assets/images/Biowaste/" + typesOfWaste.Biowaste + i + ".png");
     }
 
-    this.gameTimer = this.scene.get("Gametimer");
     this.gameFieldScene = this.scene.get("GameField");
   }
 
   create() {
+
     itemCollections.splice(0, itemCollections.length);
     currentItemsCollection = [];
     this.currentActiveItem = undefined;
@@ -68,6 +68,7 @@ class MainScene extends Phaser.Scene {
     fillAllCollections(this);
     this.updateCurrentCollection();
     this.activateItem();
+
     this.sb = new Scorebox({ scene: this });
     this.sb.x = this.sys.game.canvas.width / 2;
     this.sb.y = this.sys.game.canvas.height / 9;

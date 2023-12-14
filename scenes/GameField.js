@@ -4,12 +4,21 @@ class GameField extends Phaser.Scene {
     EventDispatcher.getInstance().on(cons.LEVEL_UPDATED, this.colorUpdated, this);
     EventDispatcher.getInstance().on(cons.END_GAME, this.handleGameEnd, this);
   }
-  preload() {}
+  preload() {
+    this.gameTimer = this.scene.get("Gametimer");
+  }
   init() {
     this.leftField;
     this.rightField;
+    this.gameTimer;
   }
   create() {
+    this.scene.bringToTop("Gametimer");
+    //Create game timer
+    this.gameTimer.newTimer(this, { posX: 100, posY: 100, callback: "", secondsCB: "", gameTime: 15, delay: 500, countdown: false });
+
+    //Create game field
+    const center = new Phaser.Math.Vector2();
     console.log("GameField was started");
     this.scale.on("resize", this.resize, this);
     this.leftField = this.add.rectangle(
