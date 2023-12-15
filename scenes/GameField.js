@@ -15,10 +15,9 @@ class GameField extends Phaser.Scene {
   create() {
     this.scene.bringToTop("Gametimer");
     //Create game timer
-    this.gameTimer.newTimer(this, { posX: 100, posY: 100, callback: "", secondsCB: "", gameTime: 15, delay: 500, countdown: false });
+    //this.gameTimer.newTimer(this, { posX: 100, posY: 100, callback: "", secondsCB: "", gameTime: 15, delay: 500, countdown: false });
 
     //Create game field
-    const center = new Phaser.Math.Vector2();
     console.log("GameField was started");
     this.scale.on("resize", this.resize, this);
     this.leftField = this.add.rectangle(
