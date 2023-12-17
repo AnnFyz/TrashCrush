@@ -39,6 +39,11 @@ class Gametimer extends Phaser.Scene {
       onStart: () => {
         log.push("onStart");
       },
+      onUpdate: (tween) => {
+        const value = Math.round(tween.getValue());
+        log.push("value: " + value);
+        //score.setText(`Score: ${value}`);
+      },
       onComplete: () => {
         log.push("onComplete");
       },

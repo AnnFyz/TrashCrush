@@ -13,10 +13,33 @@ class GameField extends Phaser.Scene {
     this.gameTimer;
   }
   create() {
+    
     this.scene.bringToTop("Gametimer");
     //Create game timer
-    //this.gameTimer.newTimer(this, { posX: 100, posY: 100, callback: "", secondsCB: "", gameTime: 15, delay: 500, countdown: false });
+    /* this.gameTimer.newTimer(this, {
+      posX: 100,
+      posY: 100,
+      callback: "",
+      secondsCB: "",
+      gameTime: 15,
+      delay: 500,
+      countdown: false,
+    }); */
 
+    let currentScore = 0;
+    let newScore = 500;
+
+    let updateTween = this.tweens.addCounter({
+      from: currentScore,
+      to: newScore,
+      duration: 60000,
+      ease: "linear",
+      onUpdate: (tween) => {
+        const value = Math.round(tween.getValue());
+        console.log("value: " + value);
+      },
+    });
+    
     //Create game field
     console.log("GameField was started");
     this.scale.on("resize", this.resize, this);
