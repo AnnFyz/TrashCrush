@@ -71,7 +71,7 @@ class MainScene extends Phaser.Scene {
 
     this.sb = new Scorebox({ scene: this });
     this.sb.x = this.sys.game.canvas.width / 2;
-    this.sb.y = this.sys.game.canvas.height / 9;
+    this.sb.y = this.sys.game.canvas.height / 1.1;
     this.timedEvent = this.time.addEvent({ delay: 250, callback: this.checkOverlap, callbackScope: this, loop: true });
   }
 

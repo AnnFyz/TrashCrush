@@ -13,10 +13,8 @@ class GameField extends Phaser.Scene {
     this.gameTimer;
   }
   create() {
-    
-    this.scene.bringToTop("Gametimer");
     //Create game timer
-    /* this.gameTimer.newTimer(this, {
+    this.gameTimer.newTimer(this, {
       posX: 100,
       posY: 100,
       callback: "",
@@ -24,10 +22,14 @@ class GameField extends Phaser.Scene {
       gameTime: 15,
       delay: 500,
       countdown: false,
-    }); */
+    });
+
+    /*  this.text1 = this.add.text(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 9, "Time:0");
+    this.text1.setOrigin(0.5, 0.5);
+    this.text1.setFontSize(350);
 
     let currentScore = 0;
-    let newScore = 500;
+    let newScore = 60;
 
     let updateTween = this.tweens.addCounter({
       from: currentScore,
@@ -36,10 +38,12 @@ class GameField extends Phaser.Scene {
       ease: "linear",
       onUpdate: (tween) => {
         const value = Math.round(tween.getValue());
+        this.text1.setText("Time:" + Math.round(tween.getValue()));
         console.log("value: " + value);
       },
     });
-    
+    Align.scaleToGameW(this.text1, 0.25, this.sys.game.canvas); */
+
     //Create game field
     console.log("GameField was started");
     this.scale.on("resize", this.resize, this);
@@ -62,8 +66,9 @@ class GameField extends Phaser.Scene {
     this.rightField.setOrigin(1, 0);
     Align.scaleToGameWHor(this.leftField, 0.25, this.sys.game.canvas);
     Align.scaleToGameWHor(this.rightField, 0.25, this.sys.game.canvas);
-    this.scene.launch("MainScene");
     EventDispatcher.getInstance().on(cons.END_GAME, this.startEndScene, this);
+    this.scene.launch("MainScene");
+    this.scene.launch("Gametimer");
   }
 
   resize(gameSize) {

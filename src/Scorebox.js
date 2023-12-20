@@ -26,15 +26,16 @@ class Scorebox extends Phaser.GameObjects.Container {
   resize() {
     if(this.scene != undefined){
     this.x = this.scene.sys.game.canvas.width / 2;
-    this.y = this.scene.sys.game.canvas.height / 9;
+    this.y = this.scene.sys.game.canvas.height / 1.1;
     Align.scaleToGameW(this.text1, 0.25, this.scene.sys.game.canvas);
     }
   }
 
   handleGameEnd(){
+    this.destroy();
     this.scene.scale.off("resize", this.resize, this);
     //EventDispatcher.getInstance().off(cons.SCORE_UPDATED, this.scoreUpdated, this);
-    this.destroy();
+
   }
 
 }
