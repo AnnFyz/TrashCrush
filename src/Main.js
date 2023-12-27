@@ -8,6 +8,7 @@ var game;
 var model;
 var gameLevels;
 var objectsToResize = [];
+var sData;
 
 window.onload = function () {
   const config = {
