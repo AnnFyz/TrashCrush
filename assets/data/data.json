@@ -1,3 +1,369 @@
 {
-  "items": {}
+  "gData": {
+    "level_1": {
+      "1": {
+        "title": "Gemüseabfall",
+        "difficulty": "1",
+        "tagline": "Von der Paprika bis zum Kohl: Ich bringe dir Geschmack und wichtige Nährstoffe. Vielleicht auch ein bisschen Schimmel...",
+        "bin": "Bio"
+      },
+      "2": {
+        "title": "Obstabfall",
+        "difficulty": "1",
+        "tagline": "In mir steckten mal ganz viele Vitamine und Frische. Kannst du mir zu neuem Glanz verhelfen?",
+        "bin": "Bio"
+      },
+      "3": {
+        "title": "Essigflasche",
+        "difficulty": "1",
+        "tagline": "In mir befand sich der saure Kick für deine Geschmacksexplosionen! Sauer macht schließlich lustig.",
+        "bin": "Glas"
+      },
+      "4": {
+        "title": "Ölflasche",
+        "difficulty": "1",
+        "tagline": "Ich koche gerne mit dir, aber mach es nicht zu heiß, sonst wird's brenzlig!",
+        "bin": "Glas"
+      },
+      "5": {
+        "title": "Weinflasche",
+        "difficulty": "1",
+        "tagline": "Ich bin genau das Richtige für entspannte Abende und ich bin für jeden Spaß zu haben.",
+        "bin": "Glas"
+      },
+      "6": {
+        "title": "Gurkenglas",
+        "difficulty": "1",
+        "tagline": "Schaffst du es meinen Deckel und mein Herz zu öffnen? Aber Vorsicht: meine süß-saure Note mag nicht jeder.",
+        "bin": "Glas"
+      },
+      "7": {
+        "title": "Joghurtbecher",
+        "difficulty": "1",
+        "tagline": "Meine vorherigen Beziehungen wurden sehr besitzergreifend. Ab jetzt definitiv keine Namens-Tattoos mehr!",
+        "bin": "LVP"
+      },
+      "8": {
+        "title": "Einkaufstüte",
+        "difficulty": "1",
+        "tagline": "Ich nehm dich gerne an die Hand und zeige dir, was in mir steckt! ",
+        "bin": "LVP"
+      },
+      "9": {
+        "title": "Eisverpackung",
+        "difficulty": "1",
+        "tagline": "Ob lustiger Filmabend oder Liebeskummer: Ich bin immer an deiner Seite.",
+        "bin": "LVP"
+      },
+      "10": {
+        "title": "Müsliriegelfolie",
+        "difficulty": "1",
+        "tagline": "Ich bin bunt und gut gelaunt. Siehst du mein Funkeln?",
+        "bin": "LVP"
+      },
+      "11": {
+        "title": "Nudeltüte",
+        "difficulty": "1",
+        "tagline": "Ich hatte genug harte Nudeln. Jetzt ist es Zeit für etwas Neues.",
+        "bin": "LVP"
+      },
+      "12": {
+        "title": "Obstbeutel",
+        "difficulty": "1",
+        "tagline": "Bereit für einen Obstsalat? Lass uns gemeinsam jeden Tag bunt und fruchtig füllen!",
+        "bin": "LVP"
+      },
+      "13": {
+        "title": "Putzmittelflasche",
+        "difficulty": "1",
+        "tagline": "Ich liebe Glanzmomente und strahlende Sauberkeit!",
+        "bin": "LVP"
+      },
+      "14": {
+        "title": "Nachfüllbeutel",
+        "difficulty": "1",
+        "tagline": "Wieso neu kaufen, wenn du nachfüllen kannst? Ich bin dein umweltfreundlicher Sidekick gegen leere Flaschen.",
+        "bin": "LVP"
+      },
+      "15": {
+        "title": "Shampooflasche",
+        "difficulty": "1",
+        "tagline": "Mit mir hast du die Haare schön.Ihr Duft erinnert mich an die frischen Aromen meiner Jugend.",
+        "bin": "LVP"
+      },
+      "16": {
+        "title": "Suppentüten",
+        "difficulty": "1",
+        "tagline": "Ich kann dir leider keinen warmen Inhalt mehr bieten, aber ich bin trotzdem immer für dich da.",
+        "bin": "LVP"
+      },
+      "17": {
+        "title": "Zahnpastatube",
+        "difficulty": "1",
+        "tagline": "Dein Lächeln strahlt genauso hell wie deine Ausstrahlung. Und das sage ich dir als echter Experte.",
+        "bin": "LVP"
+      },
+      "18": {
+        "title": "Buttermilchbecher",
+        "difficulty": "1",
+        "tagline": "Ich bin zwar leer, doch die Erinnerungen an die cremigen Momente bleiben. Gib mir eine Chance und fülle mich mit neuen, unvergesslichen Momenten.",
+        "bin": "LVP"
+      },
+      "19": {
+        "title": "Bonbonverpackung",
+        "difficulty": "1",
+        "tagline": "Bei mir wird jeder zur Naschkatze. Denn ich verschenke gerne kleine Geschmacksexplosionen.",
+        "bin": "LVP"
+      },
+      "20": {
+        "title": "Quetschbeutel",
+        "difficulty": "1",
+        "tagline": "Spaß zum Mitnehmen! Ich bin dein fruchtiger Kick im handlichen Format.",
+        "bin": "LVP"
+      },
+      "21": {
+        "title": "Briefe",
+        "difficulty": "1",
+        "tagline": "Kein Weg ist mir zu weit, um dir meine schöne Worte zu präsentieren.",
+        "bin": "Papier"
+      },
+      "22": {
+        "title": "Eierschachtel",
+        "difficulty": "1",
+        "tagline": "Ich bin das sichere Nest für deine Frühstückshelden. Bei mir bleibt jedes Ei ganz – garantiert.",
+        "bin": "Papier"
+      },
+      "23": {
+        "title": "Zeitschrift",
+        "difficulty": "1",
+        "tagline": "Ich bin dein Fenster zur Welt. Mit mir reist du in verschiedene Länder und Geschichten - ich habe immer eine interessante Story parat. ",
+        "bin": "Papier"
+      },
+      "24": {
+        "title": "Faltschachtel",
+        "difficulty": "1",
+        "tagline": "Ich bin die Ruhe im Karton. In meiner faltbaren Welt bewahre ich Stille und Ordnung. Deine Geheimnisse sind bei mir gut aufgehoben.",
+        "bin": "Papier"
+      },
+      "25": {
+        "title": "Katalog",
+        "difficulty": "1",
+        "tagline": "Bei mir blätterst du nicht nur durch Seiten, sondern durch Möglichkeiten.",
+        "bin": "Papier"
+      },
+      "26": {
+        "title": "Katzenstreu",
+        "difficulty": "1",
+        "tagline": "Katzenklo macht die Katze froh. Das weiß doch jeder. Und ich darf dabei nie fehlen.",
+        "bin": "Restmüll"
+      },
+      "27": {
+        "title": "Hygieneartikel",
+        "difficulty": "1",
+        "tagline": "Ich bin dein täglicher Begleiter für Frische und Pflege.",
+        "bin": "Restmüll"
+      },
+      "28": {
+        "title": "Zigarettenkippe",
+        "difficulty": "1",
+        "tagline": "Ich bin zwar nicht das Gesündeste, aber ich bringe dir Entspannung und lass dich Stress abbauen.",
+        "bin": "Restmüll"
+      },
+      "29": {
+        "title": "Batterie",
+        "difficulty": "1",
+        "tagline": "Ich bin pure Energie und bringe die Power für alle deine Geräte.",
+        "bin": "Rückgabe"
+      },
+      "30": {
+        "title": "Alter Fön",
+        "difficulty": "1",
+        "tagline": "Wenn es mal wieder schnell gehen muss. Ich bin am Start, wenn das Handtuch einfach zu langsam ist.",
+        "bin": "Rückgabe"
+      }
+    },
+
+    "level_2": {
+      "1": {
+        "title": "Essensreste",
+        "difficulty": "1",
+        "tagline": "Die beste Mahlzeit am ganzen Tag… sind alle Mahlzeiten!",
+        "bin": "Bio"
+      },
+      "2": {
+        "title": "Flakon",
+        "difficulty": "1",
+        "tagline": "Die Duftnoten in stylischer Hülle! Ich vereine Ästhetik und verlockenden Duft.",
+        "bin": "Glas"
+      },
+      "3": {
+        "title": "Flasche für Fruchtsaft",
+        "difficulty": "1",
+        "tagline": "Praktisch verpackt, bot ich die pure Frische an. Aber ich habe mich gut gehalten, findest du nicht?",
+        "bin": "Glas"
+      },
+      "4": {
+        "title": "Flasche für Fruchtnektar",
+        "difficulty": "1",
+        "tagline": "Früher war alles besser, als ich noch eine süße Verführung war.",
+        "bin": "Glas"
+      },
+      "5": {
+        "title": "Flaschen für Spirituosen",
+        "difficulty": "1",
+        "tagline": "Ich stehe nicht so auf Jüngere. Aber mit allen anderen stoße ich gerne an.",
+        "bin": "Glas"
+      },
+      "6": {
+        "title": "Marmeladenglas",
+        "difficulty": "1",
+        "tagline": "Mein süßes Inneres hast du schon vernascht. Jetzt kannst du mich nach deinen Wünschen auffüllen.",
+        "bin": "Glas"
+      },
+      "7": {
+        "title": "Sektflasche",
+        "difficulty": "1",
+        "tagline": "So prickelig wie ich war keiner. Und bei keinem knallt es so schön wie bei mir.",
+        "bin": "Glas"
+      },
+      "8": {
+        "title": "Verpackungsglas für Obst",
+        "difficulty": "1",
+        "tagline": "Bist du ein Vitamin-C-Bomber? Denn du machst meinen Tag strahlend!",
+        "bin": "Glas"
+      },
+      "9": {
+        "title": "Senfglas",
+        "difficulty": "1",
+        "tagline": "Leer gegessen oder nicht, scharf bin ich noch immer!",
+        "bin": "Glas"
+      },
+      "10": {
+        "title": "Arzneimittelflasche",
+        "difficulty": "1",
+        "tagline": "Ich bin nicht für jeden zu haben - mich kriegst du nur auf Rezept!",
+        "bin": "Glas"
+      },
+      "11": {
+        "title": "Flasche für Gemüsesaft",
+        "difficulty": "1",
+        "tagline": "Nur die Harten komm' in Garten. Du hättest dich sicher nicht getraut meinen herzhaften Inhalt zu probieren.",
+        "bin": "Glas"
+      },
+      "12": {
+        "title": "Verpackungsglas für Soßen",
+        "difficulty": "1",
+        "tagline": "In mir verbargen sich die Geheimnisse köstlicher Geschmacksexplosionen. Aber ich bin immer noch bereit, unser gemeinsames Essen zu verfeinern.",
+        "bin": "Glas"
+      },
+      "13": {
+        "title": "Verpackungsglas für Suppen",
+        "difficulty": "1",
+        "tagline": "Wenn’s mal schnell gehen muss, steh ich für dich bereit.",
+        "bin": "Glas"
+      },
+      "14": {
+        "title": "Verpackungsglas für Gemüse",
+        "difficulty": "1",
+        "tagline": "Auch ohne gesunde Leckerbissen biete ich noch eine nachhaltige Art der Aufbewahrung. ",
+        "bin": "Glas"
+      },
+      "15": {
+        "title": "Gemüsebeutel",
+        "difficulty": "1",
+        "tagline": "Bist du ein Superfood? Denn seit ich dich gesehen habe, fühle ich mich einfach großartig!",
+        "bin": "LVP"
+      },
+      "16": {
+        "title": "Reinigungsmittelflasche",
+        "difficulty": "1",
+        "tagline": "Kein Schmutz oder Fleck kommt gegen meine Persönlichkeit an.",
+        "bin": "LVP"
+      },
+      "17": {
+        "title": "Soßentüte",
+        "difficulty": "1",
+        "tagline": "Auch ohne Inhalt bin ich ein Experte für gemeinsame Genussmomente.",
+        "bin": "LVP"
+      },
+      "18": {
+        "title": "Getränkekarton",
+        "difficulty": "1",
+        "tagline": "Lass uns unsere Durststrecken gemeinsam überstehen und mit erfrischenden Momenten füllen.",
+        "bin": "LVP"
+      },
+      "19": {
+        "title": "Briefumschläge",
+        "difficulty": "1",
+        "tagline": "Ich bin bereit für dich, um die ganze Welt zu reisen! Deine Texte behalte ich dabei für mich.",
+        "bin": "Papier"
+      },
+      "20": {
+        "title": "Brötchentüte",
+        "difficulty": "1",
+        "tagline": "Ich bin dein Partner für das perfekte Frühstück.",
+        "bin": "Papier"
+      },
+      "21": {
+        "title": "Buch",
+        "difficulty": "1",
+        "tagline": "Ich bin das Tor zu unzähligen Welten, jede Seite eine Einladung zu neuen Abenteuern!",
+        "bin": "Papier"
+      },
+      "22": {
+        "title": "Werbeprospekt",
+        "difficulty": "1",
+        "tagline": "Meine Angebote werden dich zum Lächeln bringen.",
+        "bin": "Papier"
+      },
+      "23": {
+        "title": "Zeitung",
+        "difficulty": "1",
+        "tagline": "Glaub nicht alles, was du hörst – aber glaub mir, deine Intelligenz strahlt auf jede Seite, die du berührst.",
+        "bin": "Papier"
+      },
+      "24": {
+        "title": "Papiertragetasche",
+        "difficulty": "1",
+        "tagline": "Mit mir kommen deine Sachen sicher an – und umweltfreundlich bin ich auch noch.",
+        "bin": "Papier"
+      },
+      "25": {
+        "title": "Verbandsmaterial",
+        "difficulty": "1",
+        "tagline": "Ich bin immer für dich da, wenn es dir schlechtgeht. Ich umsorge jedes noch so kleine Wehwehchen von dir.",
+        "bin": "Restmüll"
+      },
+      "26": {
+        "title": "Windel",
+        "difficulty": "1",
+        "tagline": "Ich halte jeden Baby-Popo weich und trocken!",
+        "bin": "Restmüll"
+      },
+      "27": {
+        "title": "Pflaster",
+        "difficulty": "1",
+        "tagline": "Ich bin dein Bodyguard bei kleinen Missgeschicken – immer griffbereit und zuverlässig!",
+        "bin": "Restmüll"
+      },
+      "28": {
+        "title": "Alter Toaster",
+        "difficulty": "1",
+        "tagline": "Ich bringe deine Frühstücksideen zu knuspriger Perfektion.",
+        "bin": "Rückgabe"
+      },
+      "29": {
+        "title": "Altes Handrührgerät",
+        "difficulty": "1",
+        "tagline": "Ich bin der Küchen-Zauberstab, mit dem du in kreativen Wirbeln deine kulinarischen Träume wahr werden lässt!",
+        "bin": "Rückgabe"
+      },
+      "30": {
+        "title": "Akku",
+        "difficulty": "1",
+        "tagline": "Ich bin dein kleiner Energieheld, immer startklar für deinen digitalen Alltag!",
+        "bin": "Rückgabe"
+      }
+    }
+  }
 }
