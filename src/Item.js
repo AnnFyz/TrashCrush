@@ -42,6 +42,7 @@ class Item extends Phaser.GameObjects.Sprite {
     if (this.scene != undefined) {
       Align.scaleToGameW(this, 0.25, this.scene.sys.game.canvas);
       this.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 2);
+      this.background.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 2);
     }
   }
 
