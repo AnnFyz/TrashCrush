@@ -8,21 +8,11 @@ class GameField extends Phaser.Scene {
     this.gameTimer = this.scene.get("Gametimer");
   }
   init() {
-    this.leftField;
-    this.rightField;
+    this.topField;
+    this.bottomField;
     this.gameTimer;
   }
   create() {
-    //Create game timer
-    this.gameTimer.newTimer(this, {
-      posX: 100,
-      posY: 100,
-      callback: "",
-      secondsCB: "",
-      gameTime: 15,
-      delay: 500,
-      countdown: false,
-    });
 
     /*  this.text1 = this.add.text(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 9, "Time:0");
     this.text1.setOrigin(0.5, 0.5);
@@ -47,40 +37,64 @@ class GameField extends Phaser.Scene {
     //Create game field
     console.log("GameField was started");
     this.scale.on("resize", this.resize, this);
-    this.leftField = this.add.rectangle(
+    this.topField = this.add.rectangle(
       0,
       0,
-      this.sys.game.canvas.width / 5,
-      this.sys.game.canvas.height,
-      model._currentGameLevel.fieldColor
-    );
-    this.leftField.setOrigin(0, 0);
-
-    this.rightField = this.add.rectangle(
       this.sys.game.canvas.width,
+      this.sys.game.canvas.height / 5,
+      0xff0000
+      //model._currentGameLevel.fieldColor
+    );
+    this.topField.setOrigin(0, 0);
+
+    this.bottomField = this.add.rectangle(
       0,
-      this.sys.game.canvas.width / 5,
       this.sys.game.canvas.height,
+      this.sys.game.canvas.width,
+      this.sys.game.canvas.height / 5,
       model._currentGameLevel.fieldColor
     );
-    this.rightField.setOrigin(1, 0);
-    Align.scaleToGameWHor(this.leftField, 0.25, this.sys.game.canvas);
-    Align.scaleToGameWHor(this.rightField, 0.25, this.sys.game.canvas);
+    this.bottomField.setOrigin(0, 1);
+    Align.scaleToGameWHor(this.topField, 0.01, this.sys.game.canvas);
+    Align.scaleToGameWHor(this.bottomField, 0.01, this.sys.game.canvas);
     EventDispatcher.getInstance().on(cons.END_GAME, this.startEndScene, this);
     this.scene.launch("MainScene");
     this.scene.launch("Gametimer");
+    this.scene.bringToTop("Gametimer");
+
+    /*   this.rect1 = new Phaser.GameObjects.Rectangle(
+      this,
+      500,
+      500,
+      this.sys.game.canvas.width / 2,
+      this.sys.game.canvas.height / 2,
+      0xff0000
+    );
+    this.add.existing(this.rect1); */
+
+    //Create game timer
+    this.gameTimer.newTimer(this, {
+      posX: 100,
+      posY: 100,
+      callback: "",
+      secondsCB: "",
+      gameTime: 15,
+      delay: 500,
+      countdown: false,
+    });
+
   }
 
   resize(gameSize) {
-    Align.scaleToGameWHor(this.leftField, 0.25, gameSize);
-    Align.scaleToGameWHor(this.rightField, 0.25, gameSize);
-    this.leftField.setPosition(0, 0);
-    this.rightField.setPosition(gameSize.width, 0);
+    Align.scaleToGameWHor(this.topField, 0.01, gameSize);
+    Align.scaleToGameWHor(this.bottomField, 0.01, gameSize);
+    this.topField.setPosition(0, 0);
+    this.bottomField.setPosition(0,  this.sys.game.canvas.height);
   }
 
   colorUpdated() {
-    this.leftField.fillColor = model._currentGameLevel.fieldColor;
-    this.rightField.fillColor = model._currentGameLevel.fieldColor;
+    this.topField.fillColor = model._currentGameLevel.fieldColor;
+    this.bottomField.fillColor = model._currentGameLevel.fieldColor;
   }
 
   handleGameEnd() {

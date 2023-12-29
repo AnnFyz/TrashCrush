@@ -2,7 +2,6 @@
 //  Gametimer
 //  Ring Animation from https://github.com/maryamBaratii/Phaser3-Countdown-Clock
 //
-
 class Gametimer extends Phaser.Scene {
   constructor() {
     super("Gametimer");
@@ -11,13 +10,17 @@ class Gametimer extends Phaser.Scene {
 
   init() {
     log("=> launching Gametimer manager");
-    this.text1;
     this.currentScore;
     this.newScore;
     this.timer;
+    this.textTime;
+    this.timeInSec = 0;
   }
 
-  newTimer(scene, { posX = 100, posY = 100, callback = "", secondsCB = "", gameTime = 15, delay = 500, countdown = false }) {
+  newTimer(
+    scene,
+    { posX = 100, posY = 100, callback = "", secondsCB = "", gameTime = 15, delay = 500, countdown = false }
+  ) {
     if (this.timeRunning) {
       log("WARNING : a game timer is already running!");
       return;
@@ -35,42 +38,13 @@ class Gametimer extends Phaser.Scene {
 
     this.scene.scale.on("resize", this.resize, this);
 
-    /*  const tween = this.tweens.add({
-      from: 0,
-      to: 60,
-      ease: "Linear",
-      duration: 3000,
-      yoyo: true,
-      repeat: -1,
-      flipX: true,
-      onStart: () => {
-        log.push("onStart");
-      },
-      onUpdate: (tween) => {
-        const value = Math.round(tween.getValue());
-        log.push("value: " + value);
-        //score.setText(`Score: ${value}`);
-      },
-      onComplete: () => {
-        log.push("onComplete");
-      },
-      onYoyo: () => {
-        log.push("onYoyo");
-      },
-      onRepeat: () => {
-        log.push("onRepeat");
-      },
-      onPause: () => {
-        log.push("onPause");
-      },
-      onResume: () => {
-        log.push("onResume");
-      },
-    }); */
-
-    this.text1 = this.scene.add.text(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 9, "Time:0");
-    this.text1.setOrigin(0.5, 0.5);
-    this.text1.setFontSize(350);
+    this.textTime = this.scene.add.text(
+      this.scene.sys.game.canvas.width / 2,
+      this.scene.sys.game.canvas.height / 9,
+      "0:0"
+    );
+    this.textTime.setOrigin(0.5, 0.5);
+    this.textTime.setFontSize(350);
 
     this.currentScore = 0;
     this.newScore = 60;
@@ -95,7 +69,7 @@ class Gametimer extends Phaser.Scene {
       delay: 1000, // ms
       callback: this.updateTime,
       args: [],
-      callbackScope: this.scene,
+      callbackScope: this,
       loop: true,
       repeat: 0,
       startAt: 0,
@@ -103,11 +77,11 @@ class Gametimer extends Phaser.Scene {
       paused: false,
     });
 
-    let gameTimer = this.scene.time.addEvent({
+    this.endgameTimer = this.scene.time.addEvent({
       delay: 60000, // ms
       callback: this.startGameEnd,
       args: [],
-      callbackScope: this.scene,
+      callbackScope: this,
       loop: false,
       repeat: 0,
       startAt: 0,
@@ -115,14 +89,14 @@ class Gametimer extends Phaser.Scene {
       paused: false,
     });
 
-    Align.scaleToGameW(this.text1, 0.25, this.scene.sys.game.canvas);
+    Align.scaleToGameW(this.textTime, 0.25, this.scene.sys.game.canvas);
   }
 
   resize() {
     if (this.scene != undefined) {
       this.x = this.scene.sys.game.canvas.width / 2;
       this.y = this.scene.sys.game.canvas.height / 1.1;
-      Align.scaleToGameW(this.text1, 0.25, this.scene.sys.game.canvas);
+      Align.scaleToGameW(this.textTime, 0.25, this.scene.sys.game.canvas);
     }
   }
 
@@ -131,9 +105,9 @@ class Gametimer extends Phaser.Scene {
   }
 
   updateTime() {
+    this.timeInSec++;
     console.log("updateTime");
-    console.log("updateTime" + this.scene.timer);
-    //this.text1.setText("Time:" + this.timer.getProgress().toString());
+    this.textTime.setText("0:" + this.timeInSec);
   }
 
   startGameEnd() {

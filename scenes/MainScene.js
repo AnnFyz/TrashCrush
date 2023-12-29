@@ -167,14 +167,14 @@ class MainScene extends Phaser.Scene {
       return;
     }
     let boundsOfActiveItem = this.currentActiveItem.getBounds();
-    let boundsOfRightField = this.gameFieldScene.rightField.getBounds();
-    let boundsOfLeftField = this.gameFieldScene.leftField.getBounds();
-    if (Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfRightField)) {
+    let boundsOfBottomField = this.gameFieldScene.bottomField.getBounds();
+    let boundsOfTopField = this.gameFieldScene.topField.getBounds();
+    if (Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfBottomField)) {
       console.log("Overlap");
       this.emitter.emit(cons.ITEM_UPDATED);
       this.currentActiveItem.setPosition(this.sys.game.canvas.width / 2, this.sys.game.canvas.height / 2);
       this.timedEvent = this.time.delayedCall(50, this.swipeRight, [], this);
-    } else if (Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfLeftField)) {
+    } else if (Phaser.Geom.Intersects.RectangleToRectangle(boundsOfActiveItem, boundsOfTopField)) {
       console.log("Overlap");
       this.emitter.emit(cons.ITEM_UPDATED);
       this.timedEvent = this.time.delayedCall(50, this.swipeLeft, [], this);

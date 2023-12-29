@@ -1,7 +1,7 @@
 class Item extends Phaser.GameObjects.Sprite {
   constructor(config) {
     super(config.scene, config.x, config.y, config.key, config.index, config.wasteType);
-
+    this.background;
     this.index = config.index;
     this.wasteType = config.wasteType;
     this.scene = config.scene;
@@ -24,6 +24,8 @@ class Item extends Phaser.GameObjects.Sprite {
       this.swapeRight();
     });
     EventDispatcher.getInstance().on(cons.END_GAME, this.handleGameEnd, this);
+    this.createBackground();
+    this.setDepth(100);
   }
 
   swapeRight() {
@@ -33,6 +35,7 @@ class Item extends Phaser.GameObjects.Sprite {
 
   moveItem() {
     this.setPosition(game.input.mousePointer.x, game.input.mousePointer.y);
+    this.background.setPosition(game.input.mousePointer.x, game.input.mousePointer.y);
   }
 
   resize() {
@@ -68,5 +71,18 @@ class Item extends Phaser.GameObjects.Sprite {
       });
     }
     this.destroy();
+  }
+
+  createBackground() {
+    this.background = new Phaser.GameObjects.Rectangle(
+      this.scene,
+      this.x,
+      this.y,
+      this.x,
+      this.y,
+      0xff0000
+    );
+    this.background.setOrigin(0.5, 0.5);
+    this.scene.add.existing(this.background);
   }
 }
