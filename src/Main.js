@@ -35,7 +35,7 @@ window.onload = function () {
       target: 30,
       forceSetTimeOut: true,
     },
-    scene: [MainMenuScene, Gametimer, GameField, MainScene, UILayer, EndScene],
+    scene: [MainMenuScene, Gametimer, GameField, MainScene, UILayer, EndScene], //Preloader,
   };
 
   game = new Phaser.Game(config);

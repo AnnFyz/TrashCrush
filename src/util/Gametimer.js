@@ -89,14 +89,15 @@ class Gametimer extends Phaser.Scene {
       paused: false,
     });
 
-    Align.scaleToGameW(this.textTime, 0.25, this.scene.sys.game.canvas);
+    Align.scaleToGameW(this.textTime, 0.2, this.scene.sys.game.canvas);
   }
 
   resize() {
     if (this.scene != undefined) {
       this.x = this.scene.sys.game.canvas.width / 2;
       this.y = this.scene.sys.game.canvas.height / 1.1;
-      Align.scaleToGameW(this.textTime, 0.25, this.scene.sys.game.canvas);
+      Align.scaleToGameW(this.textTime, 0.2, this.scene.sys.game.canvas);
+      this.textTime.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 9);
     }
   }
 
@@ -112,5 +113,7 @@ class Gametimer extends Phaser.Scene {
 
   startGameEnd() {
     console.log("startGameEnd");
+    EventDispatcher.getInstance().emit(cons.END_GAME);
+    console.log("EndScene");
   }
 }

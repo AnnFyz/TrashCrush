@@ -16,10 +16,11 @@ function fillItemCollection(gameThis, amountOfItems, wasteType) {
     let item = new Item({
       scene: gameThis,
       x: gameThis.game.canvas.width / 2,
-      y: gameThis.game.canvas.height / 2,
+      y: gameThis.game.canvas.height / 2.5,
       key: wasteType + i,
       index: i,
       wasteType,
+      //sData.sData.
     });
     itemCollection.push(item);
   }

@@ -6,7 +6,16 @@ class Align {
 
   static scaleToGameWHor(obj, per, scale) {
     obj.displayWidth = scale.width * per;
-    //obj.scaleY = obj.scaleX;
+  }
+
+  
+  static scaleToGameWVer(obj, per, scale) {
+    obj.displayHeight = scale.height * per;
+  }
+
+  static scale(obj, scale, proportion) {
+    obj.x = scale.width / proportion;
+    obj.y = scale.height / proportion;
   }
 
   static center(obj, scale) {
