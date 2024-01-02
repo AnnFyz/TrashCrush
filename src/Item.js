@@ -54,7 +54,7 @@ class Item extends Phaser.GameObjects.Sprite {
     }
   }
 
-  resizeHandler() {}
+
 
   deactivateItem() {
     this.setActive(false).setVisible(false);

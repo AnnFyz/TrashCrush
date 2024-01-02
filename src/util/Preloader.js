@@ -12,5 +12,10 @@ class Preloader extends Phaser.Scene {
     console.log("PRELOADER: Asset preload done");
     // store the loaded data
     sData = this.cache.json.get("gDataSet");
+
+    this.scene.start("MainMenuScene");
+  }
+
+  create() {
   }
 }
