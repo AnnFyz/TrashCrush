@@ -74,6 +74,15 @@ class MainScene extends Phaser.Scene {
     this.sb.x = this.sys.game.canvas.width / 2;
     this.sb.y = this.sys.game.canvas.height / 1.1;
     this.timedEvent = this.time.addEvent({ delay: 250, callback: this.checkOverlap, callbackScope: this, loop: true });
+
+    let itemC = new ItemC({
+      scene: this,
+      x: this.game.canvas.width / 2,
+      y: this.game.canvas.height / 2.5,
+      key: typesOfWaste.Plastic + "0",
+      index: 0,
+      typesOfWaste: typesOfWaste.Plastic,
+    });
   }
 
   updateLevel() {
