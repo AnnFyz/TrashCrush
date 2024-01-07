@@ -108,7 +108,9 @@ class Gametimer extends Phaser.Scene {
   updateTime() {
     this.timeInSec++;
     console.log("updateTime");
-    this.textTime.setText("0:" + this.timeInSec);
+    // this.textTime.setText("0:" + this.timeInSec);
+    //this.textTime.setText(secondsToHms(this.timeInSec));
+    this.textTime.setText(secToTime(this.timeInSec));
   }
 
   startGameEnd() {
