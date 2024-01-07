@@ -98,7 +98,7 @@ class Item extends Phaser.GameObjects.Sprite {
   }
 
   createBackground() {
-    this.background = new Phaser.GameObjects.Rectangle(this.scene, this.x, this.y, 300, 500, 0xff0000);
+    this.background = new Phaser.GameObjects.Rectangle(this.scene, this.x, this.y, 200, 400, 0xff0000);
     this.background.setOrigin(0.5, 0.3);
     this.scene.add.existing(this.background);
   }
