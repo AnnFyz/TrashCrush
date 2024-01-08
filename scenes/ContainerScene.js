@@ -18,6 +18,5 @@ class ContainerScene extends Phaser.Scene {
       typesOfWaste: typesOfWaste.Plastic,
     });
 
-    //const settingsButton = new ButtonEx(this, 100, 100, "#000", "plastic" + "1", "plastic" + "2", "Settings");
   }
 }

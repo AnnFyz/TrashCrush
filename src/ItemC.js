@@ -1,6 +1,6 @@
 class ItemC extends Phaser.GameObjects.Container {
   constructor(config) {
-    super(config.scene, config.x, config.y, config.key, config.index, config.wasteType, config.desciption);
+    super(config.scene,config.x, config.y, config.key, config.index, config.wasteType, config.desciption); // config.x, config.y,
     this.scene = config.scene;
     this.x = config.x;
     this.y = config.y;
@@ -37,7 +37,8 @@ class ItemC extends Phaser.GameObjects.Container {
 
     this.createBackground();
 
-    this.imageSprite = this.scene.add.sprite(0, 0, typesOfWaste.Plastic + "0");
+    //this.imageSprite = this.scene.add.sprite(0, 0, typesOfWaste.Plastic + "0");
+    this.imageSprite = this.add.sprite(0, 0, typesOfWaste.Plastic + "0");
     this.imageSprite.setOrigin(0.5, 0.5);
     Align.center(this.imageSprite, this.scene.sys.game.canvas);
     Align.scaleToGameW(this.imageSprite, 0.25, this.scene.sys.game.canvas);
@@ -113,7 +114,8 @@ class ItemC extends Phaser.GameObjects.Container {
     this.background = new Phaser.GameObjects.Rectangle(this.scene, 0, 0, 200, 400, 0xff0000);
     this.background.setOrigin(0.5, 0.5);
     Align.center(this.background, this.scene.sys.game.canvas);
-    this.scene.add.existing(this.background);
+    this.add(this.background);
+    //this.scene.add.existing(this.background);
   }
 
   setupDescription() {
