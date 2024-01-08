@@ -11,8 +11,8 @@ class ContainerScene extends Phaser.Scene {
   create() {
     let itemC = new ItemC({
       scene: this,
-      x: 500,
-      y: 500,
+      x: this.sys.game.canvas.width / 2,
+      y: this.sys.game.canvas.height / 2,
       key: "plastic" + "0",
       index: 0,
       typesOfWaste: typesOfWaste.Plastic,
