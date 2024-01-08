@@ -24,7 +24,7 @@ class ItemC extends Phaser.GameObjects.Container {
       this.scene.input.on("drag", this.moveItem, this);
     });
     config.scene.input.on("dragend", this.resetPos, this, config.x, config.y);
-    config.scene.scale.on("resize", this.resetPos, this);
+    config.scene.scale.on("resize", this.resize, this);
     EventDispatcher.getInstance().on(cons.ITEM_UPDATED, () => {
       this.swapeRight();
     });
@@ -58,13 +58,16 @@ class ItemC extends Phaser.GameObjects.Container {
     //this.textTime.setPosition(game.input.mousePointer.x, game.input.mousePointer.y);
   }
 
+  resize() {
+    this.scale(0.5, this.scene.sys.game.canvas);
+  }
   resetPos() {
     if (this.scene != undefined) {
       //Align.scaleToGameWVer(this.background, 0.5, this.scene.sys.game.canvas);
       //Align.scaleToGameWVer(this, 0.25, this.scene.sys.game.canvas);
       this.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 2);
       //this.background.setPosition(this.scene.sys.game.canvas.width / 2, this.startPosY);
-      this.textDescription.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 1.75);
+      //this.textDescription.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 1.75);
     }
   }
 
@@ -110,7 +113,14 @@ class ItemC extends Phaser.GameObjects.Container {
   }
 
   createBackground() {
-    this.background = new Phaser.GameObjects.Rectangle(this.scene, this.width/2, this.height/2, this.width, this.height, 0xff0000);
+    this.background = new Phaser.GameObjects.Rectangle(
+      this.scene,
+      this.width / 2,
+      this.height / 2,
+      this.width,
+      this.height,
+      0xff0000
+    );
     this.background.setOrigin(1, 1);
     this.add(this.background);
   }
@@ -121,5 +131,11 @@ class ItemC extends Phaser.GameObjects.Container {
       this.scene.sys.game.canvas.height / 1.75,
       this.desciption
     );
+  }
+
+  scale(scale, proportion) {
+    this.scaleX = scale.width / proportion;
+    this.scaleY = scale.height / proportion;
+    this.setPosition(this.scaleX, this.scaleY);
   }
 }
