@@ -11,12 +11,12 @@ class ItemC extends Phaser.GameObjects.Container {
     this.index = config.index;
     this.wasteType = config.wasteType;
 
-    this.setSize(500, 500);
+    this.setSize(config.width, config.height);
     this.setInteractive();
     this.scene.input.setDraggable(this);
     this.scene.add.existing(this);
 
-    /*     this.on("pointerout", () => {
+    this.on("pointerout", () => {
       this.scene.input.off("drag", this.moveItem, this);
     });
     this.on("pointerover", () => {
@@ -28,7 +28,7 @@ class ItemC extends Phaser.GameObjects.Container {
     EventDispatcher.getInstance().on(cons.ITEM_UPDATED, () => {
       this.swapeRight();
     });
-    EventDispatcher.getInstance().on(cons.END_GAME, this.handleGameEnd, this); */
+    EventDispatcher.getInstance().on(cons.END_GAME, this.handleGameEnd, this);
 
     this.scene.input.on("drag", (pointer, gameObject, dragX, dragY) => {
       gameObject.x = dragX;
@@ -37,9 +37,9 @@ class ItemC extends Phaser.GameObjects.Container {
 
     this.createBackground();
 
-    this.imageSprite = this.scene.add.sprite(this.width/2, this.height/2, typesOfWaste.Plastic + "0");
+    this.imageSprite = this.scene.add.sprite(this.width / 2, this.height / 2, typesOfWaste.Plastic + "0");
     this.add(this.imageSprite);
-    this.imageSprite.setOrigin(1.5, 2);
+    this.imageSprite.setOrigin(1.5, 2.5);
     Align.scaleToGameW(this.imageSprite, 0.5, this);
 
     this.setupDescription();
@@ -62,8 +62,8 @@ class ItemC extends Phaser.GameObjects.Container {
     if (this.scene != undefined) {
       //Align.scaleToGameWVer(this.background, 0.5, this.scene.sys.game.canvas);
       //Align.scaleToGameWVer(this, 0.25, this.scene.sys.game.canvas);
-      this.setPosition(this.scene.sys.game.canvas.width / 2, this.startPosY);
-      this.background.setPosition(this.scene.sys.game.canvas.width / 2, this.startPosY);
+      this.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 2);
+      //this.background.setPosition(this.scene.sys.game.canvas.width / 2, this.startPosY);
       this.textDescription.setPosition(this.scene.sys.game.canvas.width / 2, this.scene.sys.game.canvas.height / 1.75);
     }
   }

@@ -1,3 +1,4 @@
+var itemC;
 class ContainerScene extends Phaser.Scene {
   constructor() {
     super("ContainerScene");
@@ -9,14 +10,15 @@ class ContainerScene extends Phaser.Scene {
   }
 
   create() {
-    let itemC = new ItemC({
+    itemC = new ItemC({
       scene: this,
       x: this.sys.game.canvas.width / 2,
       y: this.sys.game.canvas.height / 2,
+      width: 350,
+      height: 500,
       key: "plastic" + "0",
       index: 0,
       typesOfWaste: typesOfWaste.Plastic,
     });
-
   }
 }
