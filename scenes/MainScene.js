@@ -13,13 +13,15 @@ const itemCollections = []; //all item collections
 function fillItemCollection(gameThis, amountOfItems, wasteType) {
   let itemCollection = [];
   for (let i = 0; i < amountOfItems; i++) {
-    let item = new Item({
+    let item = new ItemC({
       scene: gameThis,
       x: gameThis.game.canvas.width / 2,
       y: gameThis.game.canvas.height / 2.5,
+      width: 350,
+      height: 500,
       key: wasteType + i,
       index: i,
-      wasteType,
+      typesOfWaste: wasteType,
       //sData.sData.
     });
     itemCollection.push(item);
